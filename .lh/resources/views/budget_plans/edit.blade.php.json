@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/budget_plans/edit.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726281146498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726281146498,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\r\n\r\n@section('content')\r\n<div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n        <div class=\"col-md-10\">\r\n            <div class=\"card\">\r\n                <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('Edit Budget Plan') }}</div>\r\n\r\n                <div class=\"card-body\">\r\n                    <form action=\"{{ route('budget-plans.update', $budgetPlan->id) }}\" method=\"POST\">\r\n                        @csrf\r\n                        @method('PUT')\r\n                        \r\n                        <div class=\"mb-3\">\r\n                            <label for=\"item\" class=\"form-label\">Item</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"item\" name=\"item\" value=\"{{ old('item', $budgetPlan->item) }}\" required>\r\n                        </div>\r\n\r\n                        <div class=\"mb-3\">\r\n                            <label for=\"price\" class=\"form-label\">Price</label>\r\n                            <input type=\"number\" class=\"form-control\" id=\"price\" name=\"price\" value=\"{{ old('price', $budgetPlan->price) }}\" step=\"0.01\" required>\r\n                        </div>\r\n\r\n                        <div class=\"mb-3\">\r\n                            <label for=\"quantity\" class=\"form-label\">Quantity</label>\r\n                            <input type=\"number\" class=\"form-control\" id=\"quantity\" name=\"quantity\" value=\"{{ old('quantity', $budgetPlan->quantity) }}\" required>\r\n                        </div>\r\n\r\n                        <input type=\"hidden\" name=\"travel_plan_id\" value=\"{{ $budgetPlan->travel_plan_id }}\">\r\n\r\n                        <button type=\"submit\" class=\"btn btn-primary\">Update Budget Item</button>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n@endsection\r\n"
+        }
+    ]
+}

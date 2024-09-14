@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1726199116355,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726278400850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,8 @@\n         'travel_plan_id',\n         'item',\n         'price',\n         'quantity',\n-        'total',\n     ];\n \n     // Define relationship with TravelPlan\n     public function travelPlan()\n"
+                },
+                {
+                    "date": 1726281401981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,12 +7,12 @@\n \n class BudgetPlan extends Model\n {\n     protected $fillable = [\n-        'travel_plan_id',\n         'item',\n         'price',\n         'quantity',\n+        'travel_plan_id',\n     ];\n \n     // Define relationship with TravelPlan\n     public function travelPlan()\n"
                 }
             ],
             "date": 1726199116355,

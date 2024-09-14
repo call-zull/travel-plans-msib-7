@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1726198453101,
@@ -16,6 +16,34 @@
                 {
                     "date": 1726199182388,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n \n namespace App\\Http\\Controllers;\n \n+use App\\Models\\BudgetPlan;\n use App\\Models\\TravelPlan;\n use Illuminate\\Http\\Request;\n \n class BudgetPlanController extends Controller\n@@ -13,23 +14,19 @@\n         $totalBudget = $budgetPlans->sum('total');\n         return view('budget_plans.index', compact('budgetPlans', 'travelPlan', 'totalBudget'));\n     }\n \n-    public function store(Request $request, TravelPlan $travelPlan)\n+    public function store(Request $request)\n     {\n         $request->validate([\n+            'travel_plan_id' => 'required|exists:travel_plans,id',\n             'item' => 'required|string',\n             'price' => 'required|numeric',\n             'quantity' => 'required|integer',\n+            'total' => 'required|numeric',\n         ]);\n-\n-        $total = $request->price * $request->quantity;\n-        $travelPlan->budgetPlans()->create([\n-            'item' => $request->item,\n-            'price' => $request->price,\n-            'quantity' => $request->quantity,\n-            'total' => $total,\n-        ]);\n-\n-        return redirect()->route('budget-plans.index', $travelPlan)->with('success', 'Budget Plan added successfully.');\n+    \n+        BudgetPlan::create($request->all());\n+    \n+        return redirect()->route('budget-plans.index');\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726278361029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,11 @@\n class BudgetPlanController extends Controller\n {\n     public function index(TravelPlan $travelPlan)\n     {\n+        $budgetPlans = TravelPlan::with('budgetPlans')->get();\n+\n+\n         $budgetPlans = $travelPlan->budgetPlans;\n         $totalBudget = $budgetPlans->sum('total');\n         return view('budget_plans.index', compact('budgetPlans', 'travelPlan', 'totalBudget'));\n     }\n"
+                },
+                {
+                    "date": 1726278378139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n class BudgetPlanController extends Controller\n {\n     public function index(TravelPlan $travelPlan)\n     {\n-        $budgetPlans = TravelPlan::with('budgetPlans')->get();\n+        $budgetPlans = BudgetPlan::with('budgetPlans')->get();\n \n \n         $budgetPlans = $travelPlan->budgetPlans;\n         $totalBudget = $budgetPlans->sum('total');\n"
+                },
+                {
+                    "date": 1726278400771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,10 +26,10 @@\n             'price' => 'required|numeric',\n             'quantity' => 'required|integer',\n             'total' => 'required|numeric',\n         ]);\n-    \n+\n         BudgetPlan::create($request->all());\n-    \n+\n         return redirect()->route('budget-plans.index');\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726278424421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n class BudgetPlanController extends Controller\n {\n     public function index(TravelPlan $travelPlan)\n     {\n-        $budgetPlans = BudgetPlan::with('budgetPlans')->get();\n+        $budgetPlans = BudgetPlan::with('travelPlans')->get();\n \n \n         $budgetPlans = $travelPlan->budgetPlans;\n         $totalBudget = $budgetPlans->sum('total');\n"
+                },
+                {
+                    "date": 1726278532961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n {\n     public function index(TravelPlan $travelPlan)\n     {\n         $budgetPlans = BudgetPlan::with('travelPlans')->get();\n+        \n \n \n         $budgetPlans = $travelPlan->budgetPlans;\n         $totalBudget = $budgetPlans->sum('total');\n"
+                },
+                {
+                    "date": 1726278546049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n use Illuminate\\Http\\Request;\n \n class BudgetPlanController extends Controller\n {\n-    public function index(TravelPlan $travelPlan)\n+    public function index(BudgetPlan $travelPlan)\n     {\n         $budgetPlans = BudgetPlan::with('travelPlans')->get();\n \n \n"
+                },
+                {
+                    "date": 1726278559414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n use Illuminate\\Http\\Request;\n \n class BudgetPlanController extends Controller\n {\n-    public function index(BudgetPlan $travelPlan)\n+    public function index()\n     {\n         $budgetPlans = BudgetPlan::with('travelPlans')->get();\n \n \n"
                 }
             ],
             "date": 1726198453101,
