@@ -31,9 +31,9 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $budget->item }}</td>
-                                            <td>{{ $budget->price }}</td>
+                                            <td>Rp. {{ $budget->price }}</td>
                                             <td>{{ $budget->quantity }}</td>
-                                            <td>{{ $budget->total }}</td>
+                                            <td>Rp. {{ $budget->total }}</td>
                                             <td>
                                                 <a href="{{ route('budget-plans.edit', $budget->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                                 <form action="{{ route('budget-plans.destroy', $budget->id) }}" method="POST" style="display: inline-block;">
