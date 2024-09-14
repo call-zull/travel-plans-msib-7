@@ -18,9 +18,9 @@
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
                             <select class="form-control" id="category" name="category" required>
-                                @foreach(App\Models\TravelPlan::categories() as $value => $label)
-                                    <option value="{{ $value }}">{{ $label }}</option>
-                                @endforeach
+                                @foreach (\App\Enums\TravelCategoryEnum::asSelectArray() as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
                             </select>
                         </div>
 

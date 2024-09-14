@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\TravelCategoryEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,11 +30,8 @@ class TravelPlan extends Model
         return $this->hasMany(BudgetPlan::class);
     }
 
-    public static function categories()
+    public function categoriesDescription(): Attribute
     {
-        return [
-            'Event' => 'Event',
-            'Holiday' => 'Holiday',
-        ];
+        return Attribute::make(fn() => $this->category ? TravelCategoryEnum::getDescription((int) $this->category) : null);
     }
 }

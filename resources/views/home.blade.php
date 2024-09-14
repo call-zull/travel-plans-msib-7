@@ -31,7 +31,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $plan->plan }}</td>
-                                        <td>{{ $plan->category }}</td>
+                                        <td>{{ $plan->categoriesDescription }}</td>
                                         <td>{{ $plan->day }}</td>
                                         <td>{{ $plan->start_date }} - {{ $plan->end_date }}</td>
                                         <td>{{ $plan->budgetPlans->sum('total')}}</td>
