@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Enums/TravelCategoryEnum.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726197698895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726197698895,
+            "name": "Commit-0",
+            "content": "<?php declare(strict_types=1);\n\nnamespace App\\Enums;\n\nuse BenSampo\\Enum\\Enum;\n\n/**\n * @method static static OptionOne()\n * @method static static OptionTwo()\n * @method static static OptionThree()\n */\nfinal class TravelCategoryEnum extends Enum\n{\n    const Event = 'Event';\n    const Holiday = 'Holiday';\n}"
+        }
+    ]
+}

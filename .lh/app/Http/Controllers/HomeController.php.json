@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Controllers/HomeController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1726212221123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726212461486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n      * Show the application dashboard.\n      *\n      * @return \\Illuminate\\Contracts\\Support\\Renderable\n      */\n-    // public function index()\n-    // {\n-    //     return view('home');\n-    // }\n+    public function index()\n+    {\n+        return view('home');\n+    }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1726212221123,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\n\nclass HomeController extends Controller\n{\n    /**\n     * Create a new controller instance.\n     *\n     * @return void\n     */\n    public function __construct()\n    {\n        $this->middleware('auth');\n    }\n\n    /**\n     * Show the application dashboard.\n     *\n     * @return \\Illuminate\\Contracts\\Support\\Renderable\n     */\n    // public function index()\n    // {\n    //     return view('home');\n    // }\n}"
+        }
+    ]
+}

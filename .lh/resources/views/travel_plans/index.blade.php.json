@@ -1,0 +1,26 @@
+{
+    "sourceFile": "resources/views/travel_plans/index.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1726198623850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726198640792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,43 @@\n @extends('layouts.app')\r\n \r\n @section('content')\r\n+<div class=\"container mt-4\">\r\n+    <h1>Travel Plans</h1>\r\n+    <a href=\"{{ route('travel-plans.create') }}\" class=\"btn btn-primary mb-3\">Add New Plan</a>\r\n \r\n+    <table class=\"table table-bordered\">\r\n+        <thead>\r\n+            <tr>\r\n+                <th>#</th>\r\n+                <th>Plan</th>\r\n+                <th>Category</th>\r\n+                <th>Day</th>\r\n+                <th>Date</th>\r\n+                <th>Budget</th>\r\n+                <th>Action</th>\r\n+            </tr>\r\n+        </thead>\r\n+        <tbody>\r\n+            @foreach ($travelPlans as $travelPlan)\r\n+                <tr>\r\n+                    <td>{{ $travelPlan->id }}</td>\r\n+                    <td>{{ $travelPlan->plan }}</td>\r\n+                    <td>{{ $travelPlan->category }}</td>\r\n+                    <td>{{ $travelPlan->start_date->diffInDays($travelPlan->end_date) }} Hari</td>\r\n+                    <td>{{ $travelPlan->start_date->format('d M Y') }} - {{ $travelPlan->end_date->format('d M Y') }}</td>\r\n+                    <td>{{ number_format($travelPlan->budget, 0, ',', '.') }}</td>\r\n+                    <td>\r\n+                        <a href=\"{{ route('budget-plans.index', $travelPlan) }}\" class=\"btn btn-info btn-sm\">Budget Plan</a>\r\n+                        <a href=\"{{ route('travel-plans.edit', $travelPlan) }}\" class=\"btn btn-warning btn-sm\">Edit</a>\r\n+                        <form action=\"{{ route('travel-plans.destroy', $travelPlan) }}\" method=\"POST\" style=\"display:inline;\">\r\n+                            @csrf\r\n+                            @method('DELETE')\r\n+                            <button type=\"submit\" class=\"btn btn-danger btn-sm\">Delete</button>\r\n+                        </form>\r\n+                    </td>\r\n+                </tr>\r\n+            @endforeach\r\n+        </tbody>\r\n+    </table>\r\n+</div>\r\n @endsection\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726198869274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n             @foreach ($travelPlans as $travelPlan)\r\n                 <tr>\r\n                     <td>{{ $travelPlan->id }}</td>\r\n                     <td>{{ $travelPlan->plan }}</td>\r\n-                    <td>{{ $travelPlan->category }}</td>\r\n+                    <td>{{ $travelPlan->category->description }}</td>\r\n                     <td>{{ $travelPlan->start_date->diffInDays($travelPlan->end_date) }} Hari</td>\r\n                     <td>{{ $travelPlan->start_date->format('d M Y') }} - {{ $travelPlan->end_date->format('d M Y') }}</td>\r\n                     <td>{{ number_format($travelPlan->budget, 0, ',', '.') }}</td>\r\n                     <td>\r\n"
+                }
+            ],
+            "date": 1726198623850,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\r\n\r\n@section('content')\r\n\r\n@endsection"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "resources/views/create_plan.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1726209186333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726209216529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,10 @@\n @section('content')\r\n <div class=\"container\">\r\n     <div class=\"row justify-content-center\">\r\n         <div class=\"col-md-10\">\r\n-            <a href=\"{{ route('budget-plans.create') }}\" class=\"btn btn-primary mb-3\">Add Plans</a>\r\n             <div class=\"card\">\r\n-                <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('Travel Plans') }}</div>\r\n+                <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('CreateTravel Plans') }}</div>\r\n \r\n                 <div class=\"card-body\">\r\n                     \r\n                 </div>\r\n"
+                },
+                {
+                    "date": 1726209656671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,12 +4,39 @@\n <div class=\"container\">\r\n     <div class=\"row justify-content-center\">\r\n         <div class=\"col-md-10\">\r\n             <div class=\"card\">\r\n-                <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('CreateTravel Plans') }}</div>\r\n+                <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('Create Travel Plans') }}</div>\r\n \r\n                 <div class=\"card-body\">\r\n-                    \r\n+                    <form action=\"{{ route('travel-plans.store') }}\" method=\"POST\">\r\n+                        @csrf\r\n+                        <div class=\"mb-3\">\r\n+                            <label for=\"plan\" class=\"form-label\">Plan</label>\r\n+                            <input type=\"text\" class=\"form-control\" id=\"plan\" name=\"plan\" required>\r\n+                        </div>\r\n+\r\n+                        <div class=\"mb-3\">\r\n+                            <label for=\"category\" class=\"form-label\">Category</label>\r\n+                            <select class=\"form-control\" id=\"category\" name=\"category\" required>\r\n+                                @foreach(App\\Enums\\TravelCategoryEnum::cases() as $category)\r\n+                                    <option value=\"{{ $category->value }}\">{{ $category->label() }}</option>\r\n+                                @endforeach\r\n+                            </select>\r\n+                        </div>\r\n+\r\n+                        <div class=\"mb-3\">\r\n+                            <label for=\"start_date\" class=\"form-label\">Start Date</label>\r\n+                            <input type=\"date\" class=\"form-control\" id=\"start_date\" name=\"start_date\" required>\r\n+                        </div>\r\n+\r\n+                        <div class=\"mb-3\">\r\n+                            <label for=\"end_date\" class=\"form-label\">End Date</label>\r\n+                            <input type=\"date\" class=\"form-control\" id=\"end_date\" name=\"end_date\" required>\r\n+                        </div>\r\n+\r\n+                        <button type=\"submit\" class=\"btn btn-primary\">Save Plan</button>\r\n+                    </form>\r\n                 </div>\r\n             </div>\r\n         </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1726209665946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,11 +17,11 @@\n \r\n                         <div class=\"mb-3\">\r\n                             <label for=\"category\" class=\"form-label\">Category</label>\r\n                             <select class=\"form-control\" id=\"category\" name=\"category\" required>\r\n-                                @foreach(App\\Enums\\TravelCategoryEnum::cases() as $category)\r\n+                                {{-- @foreach(App\\Enums\\TravelCategoryEnum::cases() as $category)\r\n                                     <option value=\"{{ $category->value }}\">{{ $category->label() }}</option>\r\n-                                @endforeach\r\n+                                @endforeach --}}\r\n                             </select>\r\n                         </div>\r\n \r\n                         <div class=\"mb-3\">\r\n"
+                }
+            ],
+            "date": 1726209186333,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\r\n\r\n@section('content')\r\n<div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n        <div class=\"col-md-10\">\r\n            <a href=\"{{ route('budget-plans.create') }}\" class=\"btn btn-primary mb-3\">Add Plans</a>\r\n            <div class=\"card\">\r\n                <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('Travel Plans') }}</div>\r\n\r\n                <div class=\"card-body\">\r\n                    \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n@endsection\r\n"
+        }
+    ]
+}

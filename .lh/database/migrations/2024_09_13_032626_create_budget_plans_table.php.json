@@ -1,0 +1,26 @@
+{
+    "sourceFile": "database/migrations/2024_09_13_032626_create_budget_plans_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1726198042388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726199162271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     public function up()\n     {\n         Schema::create('budget_plans', function (Blueprint $table) {\n             $table->id();\n-            $table->foreignId('travel_plan_id')->constrained()->onDelete('cascade');\n+            $table->foreignId('travel_plan_id')->constrained()->onDelete('cascade'); // Foreign key to TravelPlan\n             $table->string('item');\n             $table->decimal('price', 12, 2);\n             $table->integer('quantity');\n             $table->decimal('total', 12, 2);\n"
+                },
+                {
+                    "date": 1726208928029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,8 @@\n             $table->foreignId('travel_plan_id')->constrained()->onDelete('cascade'); // Foreign key to TravelPlan\n             $table->string('item');\n             $table->decimal('price', 12, 2);\n             $table->integer('quantity');\n-            $table->decimal('total', 12, 2);\n             $table->timestamps();\n         });\n     }\n \n"
+                }
+            ],
+            "date": 1726198042388,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    /**\n     * Run the migrations.\n     */\n    public function up()\n    {\n        Schema::create('budget_plans', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('travel_plan_id')->constrained()->onDelete('cascade');\n            $table->string('item');\n            $table->decimal('price', 12, 2);\n            $table->integer('quantity');\n            $table->decimal('total', 12, 2);\n            $table->timestamps();\n        });\n    }\n    \n    /**\n     * Reverse the migrations.\n     */\n    public function down(): void\n    {\n        Schema::dropIfExists('budget_plans');\n    }\n};"
+        }
+    ]
+}

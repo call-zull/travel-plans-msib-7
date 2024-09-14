@@ -1,0 +1,54 @@
+{
+    "sourceFile": "app/Models/TravelPlan.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1726198294445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726199108018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n use Illuminate\\Database\\Eloquent\\Model;\n \n class TravelPlan extends Model\n {\n+    use HasFactory;\n     protected $fillable = [\n         'plan',\n         'category',\n         'day',\n"
+                },
+                {
+                    "date": 1726199257833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,13 @@\n         'end_date',\n         'budget',\n     ];\n \n+    public function budgetPlans()\n+    {\n+        return $this->hasMany(BudgetPlan::class);\n+    }\n+\n     protected $casts = [\n         'category' => TravelCategoryEnum::class,\n     ];\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726209305256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,8 @@\n         'category',\n         'day',\n         'start_date',\n         'end_date',\n-        'budget',\n     ];\n \n     public function budgetPlans()\n     {\n"
+                },
+                {
+                    "date": 1726210239857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n     {\n         return $this->hasMany(BudgetPlan::class);\n     }\n \n-    protected $casts = [\n-        'category' => TravelCategoryEnum::class,\n-    ];\n+//     protected $casts = [\n+//         'category' => TravelCategoryEnum::class,\n+//     ];\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726210904998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n     {\n         return $this->hasMany(BudgetPlan::class);\n     }\n \n-//     protected $casts = [\n+    //     protected $casts = [\n //         'category' => TravelCategoryEnum::class,\n //     ];\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726211259319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,12 @@\n     {\n         return $this->hasMany(BudgetPlan::class);\n     }\n \n-    //     protected $casts = [\n-//         'category' => TravelCategoryEnum::class,\n-//     ];\n+    public static function categories()\n+    {\n+        return [\n+            'Event' => 'Event',\n+            'Holiday' => 'Holiday',\n+        ];\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726211272053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,11 @@\n     public function budgetPlans()\n     {\n         return $this->hasMany(BudgetPlan::class);\n     }\n+    protected $casts = [\n+        'category' => 'string', // pastikan enum di-cast sebagai string\n+    ];\n \n     public static function categories()\n     {\n         return [\n"
+                },
+                {
+                    "date": 1726211424728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,8 @@\n     use HasFactory;\n     protected $fillable = [\n         'plan',\n         'category',\n-        'day',\n         'start_date',\n         'end_date',\n     ];\n \n"
+                },
+                {
+                    "date": 1726211858717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,22 +7,27 @@\n \n class TravelPlan extends Model\n {\n     use HasFactory;\n+\n     protected $fillable = [\n         'plan',\n         'category',\n         'start_date',\n         'end_date',\n     ];\n \n+    // Cast date fields to Carbon instances\n+    protected $casts = [\n+        'start_date' => 'date',\n+        'end_date' => 'date',\n+        'category' => 'string',\n+    ];\n+\n     public function budgetPlans()\n     {\n         return $this->hasMany(BudgetPlan::class);\n     }\n-    protected $casts = [\n-        'category' => 'string', // pastikan enum di-cast sebagai string\n-    ];\n \n     public static function categories()\n     {\n         return [\n"
+                }
+            ],
+            "date": 1726198294444,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass TravelPlan extends Model\n{\n    protected $fillable = [\n        'plan',\n        'category',\n        'day',\n        'start_date',\n        'end_date',\n        'budget',\n    ];\n\n    protected $casts = [\n        'category' => TravelCategoryEnum::class,\n    ];\n}"
+        }
+    ]
+}
