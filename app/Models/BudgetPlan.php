@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BudgetPlan extends Model
 {
     protected $fillable = [
-        'travel_plan_id',
         'item',
         'price',
         'quantity',
-        'total',
+        'travel_plan_id',
     ];
 
     // Define relationship with TravelPlan

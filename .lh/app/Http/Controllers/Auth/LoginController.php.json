@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Http/Controllers/Auth/LoginController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726277878500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726277878500,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Auth;\n\nuse App\\Http\\Controllers\\Controller;\nuse Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\n\nclass LoginController extends Controller\n{\n    /*\n    |--------------------------------------------------------------------------\n    | Login Controller\n    |--------------------------------------------------------------------------\n    |\n    | This controller handles authenticating users for the application and\n    | redirecting them to your home screen. The controller uses a trait\n    | to conveniently provide its functionality to your applications.\n    |\n    */\n\n    use AuthenticatesUsers;\n\n    /**\n     * Where to redirect users after login.\n     *\n     * @var string\n     */\n    protected $redirectTo = '/travel-plans';\n\n    /**\n     * Create a new controller instance.\n     *\n     * @return void\n     */\n    public function __construct()\n    {\n        $this->middleware('guest')->except('logout');\n        $this->middleware('auth')->only('logout');\n    }\n}"
+        }
+    ]
+}

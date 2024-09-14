@@ -24,7 +24,7 @@
                         <tbody>
                             @if($travelPlans->isEmpty())
                                 <tr>
-                                    <td colspan="7">No Travel Plans found.</td>
+                                    <td colspan="8">No Travel Plans found.</td>
                                 </tr>
                             @else
                                 @foreach($travelPlans as $plan)
@@ -33,8 +33,8 @@
                                         <td>{{ $plan->plan }}</td>
                                         <td>{{ $plan->category }}</td>
                                         <td>{{ $plan->day }}</td>
-                                        <td>{{ $plan->start_date }} - {{ $plan->end_date }}</td>
-                                        <td>{{ $plan->budgetPlans->sum('total')}}</td>
+                                        <td>{{ $plan->formatted_date }}</td>
+                                        <td>Rp. {{ $plan->total_budget }}</td>
                                         <td>
                                             <a href="{{ route('travel-plans.edit', $plan->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                             <form action="{{ route('travel-plans.destroy', $plan->id) }}" method="POST" style="display: inline-block;">
@@ -42,7 +42,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                                             </form>
-                                            <a href="{{ route('budget-plans.index', $plan->id) }}" class="btn btn-sm btn-warning">Budget Plan</a>
+                                            <a href="{{ route('budget-plans.index', ['travel_plan_id' => $plan->id]) }}" class="btn btn-sm btn-warning">Budget Plan</a>
                                         </td>
                                     </tr>
                                 @endforeach

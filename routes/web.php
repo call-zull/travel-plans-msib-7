@@ -10,7 +10,7 @@ Route::get('/', function () {
     return redirect('/travel-plans');
 });
 
-Route::get('/home', [TravelPlanController::class, 'index'])->name('home');
+// Route::resource('home', TravelPlanController::class);
 // Route::get('/home', [TravelPlanController::class, 'index'])->name('home');
 
 

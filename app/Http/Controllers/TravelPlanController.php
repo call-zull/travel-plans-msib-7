@@ -19,8 +19,24 @@ class TravelPlanController extends Controller
     public function index()
     {
         $travelPlans = TravelPlan::with('budgetPlans')->get();
+        foreach ($travelPlans as $plan) {
+            $startDate = Carbon::parse($plan->start_date);
+            $endDate = Carbon::parse($plan->end_date);
 
-        // Kirim data ke view 'home'
+            $plan->day = $startDate->diffInDays($endDate) + 1;
+
+            if ($startDate->format('M Y') == $endDate->format('M Y')) {
+                $plan->formatted_date = $startDate->format('d') . ' - ' . $endDate->format('d M Y');
+            } else {
+                $plan->formatted_date = $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y');
+            }
+
+            $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
+                return $budgetPlan->price * $budgetPlan->quantity;
+            });
+        }
+
+
         return view('home', compact('travelPlans'));
     }
 
@@ -56,7 +72,7 @@ class TravelPlanController extends Controller
             'end_date' => $request->end_date,
         ]);
 
-        return redirect()->route('home')->with('status', 'Travel plan created successfully!');
+        return redirect()->route('travel-plans.index')->with('status', 'Travel plan created successfully!');
     }
 
     /**
@@ -94,7 +110,7 @@ class TravelPlanController extends Controller
             'end_date' => $request->end_date,
         ]);
 
-        return redirect()->route('home')->with('status', 'Travel plan updated successfully!');
+        return redirect()->route('travel-plans.index')->with('status', 'Travel plan updated successfully!');
     }
 
     /**
@@ -105,6 +121,6 @@ class TravelPlanController extends Controller
         $travelPlan = TravelPlan::findOrFail($id);
         $travelPlan->delete();
 
-        return redirect()->route('home')->with('status', 'Travel plan deleted successfully!');
+        return redirect()->route('travel-plans.index')->with('status', 'Travel plan deleted successfully!');
     }
 }
