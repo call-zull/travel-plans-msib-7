@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Enums;
 
@@ -15,6 +17,6 @@ final class TravelCategoryEnum extends Enum
     #[Description('Event')]
     const Event = 1;
 
-    #[Description('Holaday')]
-    const Holaday = 2;
+    #[Description('Holiday')]
+    const Holiday = 2;
 }

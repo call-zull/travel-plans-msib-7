@@ -8,46 +8,36 @@ use Illuminate\Http\Request;
 
 class BudgetPlanController extends Controller
 {
-    public function index(Request $request)
+    public function index(TravelPlan $travelPlan)
     {
-        $travel_plan_id = $request->input('travel_plan_id');
-
-        $budgetPlans = BudgetPlan::where('travel_plan_id', $travel_plan_id)->get();
+        $budgetPlans = BudgetPlan::where('travel_plan_id', $travelPlan->id)->get();
 
         foreach ($budgetPlans as $budgetPlan) {
             $budgetPlan->total = $budgetPlan->price * $budgetPlan->quantity;
         }
 
-        return view('budget_plans.index', compact('budgetPlans', 'travel_plan_id'));
+        return view('budget_plans.index', compact('travelPlan', 'budgetPlans'));
     }
 
 
-    public function create(Request $request)
+    public function create(TravelPlan $travelPlan)
     {
-        $travel_plan_id = $request->input('travel_plan_id');
-
-        return view('budget_plans.create', compact('travel_plan_id'));
+        return view('budget_plans.create', compact('travelPlan'));
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, TravelPlan $travelPlan)
     {
-        $request->validate([
+        $data = $request->validate([
             'item' => 'required|string|max:255',
             'price' => 'required|numeric',
             'quantity' => 'required|integer',
-            'travel_plan_id' => 'required|exists:travel_plans,id',
         ]);
 
-        BudgetPlan::create([
-            'item' => $request->item,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'travel_plan_id' => $request->travel_plan_id,
-        ]);
+        $travelPlan->budgetPlans()->create($data);
 
-        return redirect()->route('budget-plans.index', ['travel_plan_id' => $request->travel_plan_id])
-            ->with('status', 'Budget item created successfully!');
+        notyf('Budget item created successfully!');
+        return to_route('travel-plans.budget-plans.index', $travelPlan->id);
     }
 
 
@@ -77,14 +67,11 @@ class BudgetPlanController extends Controller
             ->with('status', 'Budget item updated successfully!');
     }
 
-    public function destroy($id)
+    public function destroy(TravelPlan $travelPlan, BudgetPlan $budgetPlan)
     {
-        $budgetPlan = BudgetPlan::findOrFail($id);
         $budgetPlan->delete();
 
-        return redirect()->route('budget-plans.index', ['travel_plan_id' => $budgetPlan->travel_plan_id])
-            ->with('status', 'Budget item deleted successfully!');
+        notyf('Budget item deleted successfully!');
+        return redirect()->route('travel-plans.budget-plans.index', $travelPlan);
     }
-
-    
 }

@@ -15,4 +15,4 @@ Route::get('/', function () {
 
 
 Route::resource('travel-plans', TravelPlanController::class);
-Route::resource('budget-plans', BudgetPlanController::class);
+Route::resource('travel-plans.budget-plans', BudgetPlanController::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TravelPlanRequest;
 use App\Models\TravelPlan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -18,24 +19,15 @@ class TravelPlanController extends Controller
     }
     public function index()
     {
-        $travelPlans = TravelPlan::with('budgetPlans')->get();
+        $travelPlans = TravelPlan::with('budgetPlans')
+            // ->withSum('budgetPlans as total_budget', 'total')
+            ->paginate(10);
+
         foreach ($travelPlans as $plan) {
-            $startDate = Carbon::parse($plan->start_date);
-            $endDate = Carbon::parse($plan->end_date);
-
-            $plan->day = $startDate->diffInDays($endDate) + 1;
-
-            if ($startDate->format('M Y') == $endDate->format('M Y')) {
-                $plan->formatted_date = $startDate->format('d') . ' - ' . $endDate->format('d M Y');
-            } else {
-                $plan->formatted_date = $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y');
-            }
-
             $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
                 return $budgetPlan->price * $budgetPlan->quantity;
             });
         }
-
 
         return view('home', compact('travelPlans'));
     }
@@ -51,76 +43,45 @@ class TravelPlanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TravelPlanRequest $request)
     {
-        $request->validate([
-            'plan' => 'required|string|max:255',
-            'category' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
+        $data = $request->validated();
 
-        $startDate = Carbon::parse($request->start_date);
-        $endDate = Carbon::parse($request->end_date);
-        $day = $startDate->diffInDays($endDate) + 1;
+        TravelPlan::create($data);
 
-        TravelPlan::create([
-            'plan' => $request->plan,
-            'category' => $request->category,
-            'day' => $day,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);
-
-        return redirect()->route('travel-plans.index')->with('status', 'Travel plan created successfully!');
+        notyf('Travel plan created successfully!');
+        return to_route('travel-plans.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(TravelPlan $travelPlan)
     {
-        $travelPlan = TravelPlan::findOrFail($id);
         return view('travel-plans.edit', compact('travelPlan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TravelPlanRequest $request, TravelPlan $travelPlan)
     {
-        $request->validate([
-            'plan' => 'required|string|max:255',
-            'category' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
+        $data = $request->validated();
 
-        $travelPlan = TravelPlan::findOrFail($id);
+        $travelPlan->update($data);
 
-        $startDate = Carbon::parse($request->start_date);
-        $endDate = Carbon::parse($request->end_date);
-        $day = $startDate->diffInDays($endDate) + 1;
-
-        $travelPlan->update([
-            'plan' => $request->plan,
-            'category' => $request->category,
-            'day' => $day,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);
-
-        return redirect()->route('travel-plans.index')->with('status', 'Travel plan updated successfully!');
+        notyf('Travel plan updated successfully!');
+        return to_route('travel-plans.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(TravelPlan $travelPlan)
     {
-        $travelPlan = TravelPlan::findOrFail($id);
         $travelPlan->delete();
 
-        return redirect()->route('travel-plans.index')->with('status', 'Travel plan deleted successfully!');
+        notyf('Travel plan deleted successfully!');
+        return to_route('travel-plans.index');
     }
 }

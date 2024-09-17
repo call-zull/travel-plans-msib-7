@@ -14,15 +14,19 @@
                             <div class="mb-3">
                                 <label for="plan" class="form-label">Plan</label>
                                 <input type="text" class="form-control" id="plan" name="plan"
-                                    value="{{ old('plan', $travelPlan->plan) }}" required>
+                                    value="{{ old('plan', $travelPlan->plan) }}">
+                                @error('plan')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
                                 <select class="form-control" id="category" name="category" required>
-                                    <option value="{{$travelPlan->category}}">{{$travelPlan->categoriesDescription}}</option>
+                                    <option value="{{ $travelPlan->category }}">{{ $travelPlan->categoryDescription }}
+                                    </option>
                                     @foreach (\App\Enums\TravelCategoryEnum::asSelectArray() as $key => $item)
-                                        <option value="{{ $key }}">{{ $item  }}</option>
+                                        <option value="{{ $key }}">{{ $item }}</option>
                                     @endforeach
                                 </select>
                             </div>
