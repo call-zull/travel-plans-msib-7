@@ -1,0 +1,12 @@
+
+
+add helper nya ke dalam composer.json
+"autoload": {
+    "files": [
+        "app/currency_helper.php"
+    ]
+}
+
+
+kemudian jalankan composer dump-autoload
+untuk membuat helper nya

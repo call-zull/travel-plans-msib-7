@@ -2,6 +2,7 @@
 
 namespace App\Enums;
 
+use BenSampo\Enum\Attributes\Description;
 use BenSampo\Enum\Enum;
 
 /**
@@ -11,6 +12,9 @@ use BenSampo\Enum\Enum;
  */
 final class TravelCategoryEnum extends Enum
 {
-    const Event = 'Event';
-    const Holiday = 'Holiday';
+    #[Description('Event')]
+    const Event = 1;
+
+    #[Description('Holaday')]
+    const Holaday = 2;
 }

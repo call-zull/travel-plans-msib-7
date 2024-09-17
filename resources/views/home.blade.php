@@ -31,10 +31,10 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $plan->plan }}</td>
-                                        <td>{{ $plan->category }}</td>
+                                        <td>{{ $plan->categoriesDescription }}</td>
                                         <td>{{ $plan->day }}</td>
                                         <td>{{ $plan->formatted_date }}</td>
-                                        <td>Rp. {{ $plan->total_budget }}</td>
+                                        <td>{{ formatMataUang($plan->total_budget) }}</td>
                                         <td>
                                             <a href="{{ route('travel-plans.edit', $plan->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                             <form action="{{ route('travel-plans.destroy', $plan->id) }}" method="POST" style="display: inline-block;">
