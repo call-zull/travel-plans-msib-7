@@ -26,6 +26,7 @@
                                     value="{{ old('quantity') }}" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Save Budget Item</button>
+                            <a href="{{ route('travel-plans.budget-plans.index', $travelPlan->id) }}" class="btn btn-secondary">Cancel</a>
                         </form>
                     </div>
                 </div>

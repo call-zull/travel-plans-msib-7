@@ -16,3 +16,5 @@ Route::get('/', function () {
 
 Route::resource('travel-plans', TravelPlanController::class);
 Route::resource('travel-plans.budget-plans', BudgetPlanController::class);
+
+Route::get('search-plan', [TravelPlanController::class, 'search'])->name('search.plan');

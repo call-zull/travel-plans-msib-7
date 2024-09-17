@@ -8,17 +8,36 @@ use Illuminate\Http\Request;
 
 class BudgetPlanController extends Controller
 {
-    public function index(TravelPlan $travelPlan)
-    {
-        $budgetPlans = BudgetPlan::where('travel_plan_id', $travelPlan->id)->get();
+    // public function index(TravelPlan $travelPlan)
+    // {
+    //     $budgetPlans = BudgetPlan::where('travel_plan_id', $travelPlan->id)->get();
 
+    //     foreach ($budgetPlans as $budgetPlan) {
+    //         $budgetPlan->total = $budgetPlan->price * $budgetPlan->quantity;
+    //     }
+
+    //     return view('budget_plans.index', compact('travelPlan', 'budgetPlans'));
+    // }
+
+    public function index(Request $request, TravelPlan $travelPlan)
+    {
+        $query = BudgetPlan::where('travel_plan_id', $travelPlan->id);
+
+     // Tambahkan filter pencarian jika ada pencarian
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where('item', 'LIKE', "%{$search}%");
+        }
+
+        $budgetPlans = $query->get();
+
+        // Calculate the total price for each budget item
         foreach ($budgetPlans as $budgetPlan) {
             $budgetPlan->total = $budgetPlan->price * $budgetPlan->quantity;
         }
 
         return view('budget_plans.index', compact('travelPlan', 'budgetPlans'));
     }
-
 
     public function create(TravelPlan $travelPlan)
     {

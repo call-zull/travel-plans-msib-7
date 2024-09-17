@@ -11,6 +11,11 @@
                     <div class="card-header fw-bold text-uppercase text-symbol">{{ __('Budget Items') }}</div>
 
                     <div class="card-body">
+                        <form action="{{ route('travel-plans.budget-plans.index', $travelPlan->id) }}" method="get">
+                            <input type="text" name="search" id="search" placeholder="Search for item budget" value="{{ request()->search }}">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+
                         <table class="table table-bordered table-responsive">
                             <thead>
                                 <tr>
