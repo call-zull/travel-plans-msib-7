@@ -82,8 +82,8 @@ class BudgetPlanController extends Controller
             'total' => $request->price * $request->quantity, // Update the total
         ]);
 
-        return redirect()->route('travel-plans.budget-plans.index', $travelPlan->id)
-            ->with('status', 'Budget item updated successfully!');
+        notyf('Travel plan deleted successfully!');
+        return redirect()->route('travel-plans.budget-plans.index', $travelPlan->id);
     }
 
     public function destroy(TravelPlan $travelPlan, BudgetPlan $budgetPlan)
