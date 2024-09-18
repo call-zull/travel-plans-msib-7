@@ -23,11 +23,9 @@ class BudgetPlanController extends Controller
     {
         $query = BudgetPlan::where('travel_plan_id', $travelPlan->id);
 
-     // Tambahkan filter pencarian jika ada pencarian
-        if ($request->has('search') && $request->search) {
-            $search = $request->search;
-            $query->where('item', 'LIKE', "%{$search}%");
-        }
+        // filter pencarian jika ada pencarian
+        $search = $request->search;
+        $query->where('item', 'LIKE', "%{$search}%");
 
         $budgetPlans = $query->get();
 
