@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 44,
+            "activePatchIndex": 45,
             "patches": [
                 {
                     "date": 1726193394928,
@@ -184,6 +184,10 @@
                 {
                     "date": 1726619905763,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n                                         </td>\n                                     </tr>\n                                 @empty\n                                     <tr>\n-                                        <td colspan=\"8\">No Travel Plans found.</td>\n+                                        <td colspan=\"8\" class=\"text-center fw-bold text-uppercase text-symbol\">No Travel Plans found.</td>\n                                     </tr>\n                                 @endforelse\n                             </tbody>\n                         </table>\n"
+                },
+                {
+                    "date": 1726624904033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n                                         </td>\n                                     </tr>\n                                 @empty\n                                     <tr>\n-                                        <td colspan=\"8\" class=\"text-center fw-bold text-uppercase text-symbol\">No Travel Plans found.</td>\n+                                        <td colspan=\"8\">No Travel Plans found.</td>\n                                     </tr>\n                                 @endforelse\n                             </tbody>\n                         </table>\n"
                 }
             ],
             "date": 1726193394928,

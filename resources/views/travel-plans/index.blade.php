@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
+                <a href="{{ route('travel-plans.index') }}" class="btn btn-warning mb-3">Home</a>
                 <a href="{{ route('travel-plans.create') }}" class="btn btn-primary mb-3">Add Plans</a>
 
                 @if (Session::get('status'))
@@ -42,7 +43,8 @@
                                         <td>{{ $plan->day }}</td>
                                         {{-- <td>{{ \App\Helpers\FormatDate::format($plan->start_date, $plan->end_date) }}</td> --}}
                                         <td>{{ $plan->formatted_date }}</td>
-                                        <td>{{ formatMataUang($plan->total_budget) }}</td>
+                                        {{-- <td>{{ formatMataUang($plan->total_budget) }}</td> --}}
+                                        <td>{{ formatMataUang($plan->budget_plans_sum_total) }}</td>
                                         <td>
                                             <a href="{{ route('travel-plans.edit', $plan->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>

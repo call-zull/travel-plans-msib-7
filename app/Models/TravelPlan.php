@@ -38,7 +38,7 @@ class TravelPlan extends Model
 
     //     return Attribute::make(fn() => $day);
     // }
-
+ 
     public function formattedDate(): Attribute
     {
         $formatted_date = null;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TravelPlanRequest;
+use App\Models\BudgetPlan;
 use App\Models\TravelPlan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -24,7 +25,8 @@ class TravelPlanController extends Controller
         // ->paginate(10);
         $userId = auth()->id();
         $travelPlans = TravelPlan::with('budgetPlans')
-            ->where('user_id', $userId) // Filter by logged-in user
+            ->where('user_id', $userId)
+            ->withSum('budgetPlans', 'total') // Filter by logged-in user
             ->paginate(10);
 
         // foreach ($travelPlans as $plan) {
@@ -32,11 +34,11 @@ class TravelPlanController extends Controller
         //         return $budgetPlan->price * $budgetPlan->quantity;
         //     });
         // }
-        foreach ($travelPlans as $plan) {
-            $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
-                return $budgetPlan->total;
-            });
-        }
+        // foreach ($travelPlans as $plan) {
+        //     $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
+        //         return $budgetPlan->total;
+        //     });
+        // }
 
         return view('travel-plans.index', compact('travelPlans'));
     }
