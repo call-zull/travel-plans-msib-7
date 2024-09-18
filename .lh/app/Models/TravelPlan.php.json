@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 9,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1726198294445,
@@ -44,6 +44,14 @@
                 {
                     "date": 1726211858717,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,22 +7,27 @@\n \n class TravelPlan extends Model\n {\n     use HasFactory;\n+\n     protected $fillable = [\n         'plan',\n         'category',\n         'start_date',\n         'end_date',\n     ];\n \n+    // Cast date fields to Carbon instances\n+    protected $casts = [\n+        'start_date' => 'date',\n+        'end_date' => 'date',\n+        'category' => 'string',\n+    ];\n+\n     public function budgetPlans()\n     {\n         return $this->hasMany(BudgetPlan::class);\n     }\n-    protected $casts = [\n-        'category' => 'string', // pastikan enum di-cast sebagai string\n-    ];\n \n     public static function categories()\n     {\n         return [\n"
+                },
+                {
+                    "date": 1726543959833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,8 +51,13 @@\n \n         return Attribute::make(fn() => $formatted_date);\n     }\n \n+    public function user()\n+{\n+    return $this->belongsTo(User::class);\n+}\n+\n     public function budgetPlans()\n     {\n         return $this->hasMany(BudgetPlan::class);\n     }\n@@ -60,5 +65,5 @@\n     public function categoryDescription(): Attribute\n     {\n         return Attribute::make(fn() => $this->category ? TravelCategoryEnum::getDescription((int) $this->category) : null);\n     }\n-}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726544778734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n         'plan',\n         'category',\n         'start_date',\n         'end_date',\n+        'user_id',\n     ];\n \n     // Cast date fields to Carbon instances\n     protected $casts = [\n"
                 }
             ],
             "date": 1726198294444,

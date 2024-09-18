@@ -19,13 +19,22 @@ class TravelPlanController extends Controller
     }
     public function index()
     {
-        $travelPlans = TravelPlan::with('budgetPlans')
+        // $travelPlans = TravelPlan::with('budgetPlans')
             // ->withSum('budgetPlans as total_budget', 'total')
+        // ->paginate(10);
+        $userId = auth()->id();
+        $travelPlans = TravelPlan::with('budgetPlans')
+            ->where('user_id', $userId) // Filter by logged-in user
             ->paginate(10);
 
+        // foreach ($travelPlans as $plan) {
+        //     $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
+        //         return $budgetPlan->price * $budgetPlan->quantity;
+        //     });
+        // }
         foreach ($travelPlans as $plan) {
             $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
-                return $budgetPlan->price * $budgetPlan->quantity;
+                return $budgetPlan->total;
             });
         }
 
@@ -47,6 +56,12 @@ class TravelPlanController extends Controller
     {
         $data = $request->validated();
 
+        $data['user_id'] = auth()->id();
+
+        $startDate = Carbon::parse($data['start_date']);
+        $endDate = Carbon::parse($data['end_date']);
+        $data['day'] = $startDate->diffInDays($endDate) + 1;
+
         TravelPlan::create($data);
 
         notyf('Travel plan created successfully!');
@@ -67,7 +82,9 @@ class TravelPlanController extends Controller
     public function update(TravelPlanRequest $request, TravelPlan $travelPlan)
     {
         $data = $request->validated();
-
+        $startDate = Carbon::parse($data['start_date']);
+        $endDate = Carbon::parse($data['end_date']);
+        $data['day'] = $startDate->diffInDays($endDate) + 1;
         $travelPlan->update($data);
 
         notyf('Travel plan updated successfully!');

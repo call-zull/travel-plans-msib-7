@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1726198042388,
@@ -16,6 +16,10 @@
                 {
                     "date": 1726208928029,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,8 @@\n             $table->foreignId('travel_plan_id')->constrained()->onDelete('cascade'); // Foreign key to TravelPlan\n             $table->string('item');\n             $table->decimal('price', 12, 2);\n             $table->integer('quantity');\n-            $table->decimal('total', 12, 2);\n             $table->timestamps();\n         });\n     }\n \n"
+                },
+                {
+                    "date": 1726620903343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n             $table->foreignId('travel_plan_id')->constrained()->onDelete('cascade'); // Foreign key to TravelPlan\n             $table->string('item');\n             $table->decimal('price', 12, 2);\n             $table->integer('quantity');\n+            $table->integer('total');\n             $table->timestamps();\n         });\n     }\n \n"
                 }
             ],
             "date": 1726198042388,

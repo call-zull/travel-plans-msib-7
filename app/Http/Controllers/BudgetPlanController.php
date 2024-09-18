@@ -34,6 +34,8 @@ class BudgetPlanController extends Controller
             'quantity' => 'required|integer',
         ]);
 
+        $data['total'] = $data['price'] * $data['quantity'];
+
         $travelPlan->budgetPlans()->create($data);
 
         notyf('Budget item created successfully!');
@@ -41,13 +43,13 @@ class BudgetPlanController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(TravelPlan $travelPlan, $budgetPlanId)
     {
-        $budgetPlan = BudgetPlan::findOrFail($id);
-        return view('budget_plans.edit', compact('budgetPlan'));
+        $budgetPlan = BudgetPlan::findOrFail($budgetPlanId);
+        return view('budget_plans.edit', compact('travelPlan', 'budgetPlan'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, TravelPlan $travelPlan, $budgetPlanId)
     {
         $request->validate([
             'item' => 'required|string|max:255',
@@ -55,15 +57,15 @@ class BudgetPlanController extends Controller
             'quantity' => 'required|integer',
         ]);
 
-        $budgetPlan = BudgetPlan::findOrFail($id);
+        $budgetPlan = BudgetPlan::findOrFail($budgetPlanId);
         $budgetPlan->update([
             'item' => $request->item,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'total' => $request->price * $request->quantity, // Optionally update total
+            'total' => $request->price * $request->quantity, // Update the total
         ]);
 
-        return redirect()->route('budget-plans.index', ['travel_plan_id' => $budgetPlan->travel_plan_id])
+        return redirect()->route('travel-plans.budget-plans.index', $travelPlan->id)
             ->with('status', 'Budget item updated successfully!');
     }
 

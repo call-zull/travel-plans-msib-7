@@ -8,7 +8,7 @@
                 <div class="card-header fw-bold text-uppercase text-symbol">{{ __('Edit Budget Plan') }}</div>
 
                 <div class="card-body">
-                    <form action="{{ route('budget-plans.update', $budgetPlan->id) }}" method="POST">
+                    <form action="{{ route('travel-plans.budget-plans.update', [$budgetPlan->travel_plan_id, $budgetPlan->id]) }}" method="POST">
                         @csrf
                         @method('PUT')
                         

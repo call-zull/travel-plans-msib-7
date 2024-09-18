@@ -17,6 +17,8 @@ class TravelPlan extends Model
         'category',
         'start_date',
         'end_date',
+        'user_id',
+        'day',
     ];
 
     // Cast date fields to Carbon instances
@@ -26,16 +28,16 @@ class TravelPlan extends Model
         'category' => 'string',
     ];
 
-    protected $appends = ['day'];
+    // protected $appends = ['day'];
 
-    public function day(): Attribute
-    {
-        $startDate = Carbon::parse($this->start_date);
-        $endDate = Carbon::parse($this->end_date);
-        $day = $startDate->diffInDays($endDate) + 1;
+    // public function day(): Attribute
+    // {
+    //     $startDate = Carbon::parse($this->start_date);
+    //     $endDate = Carbon::parse($this->end_date);
+    //     $day = $startDate->diffInDays($endDate) + 1;
 
-        return Attribute::make(fn() => $day);
-    }
+    //     return Attribute::make(fn() => $day);
+    // }
 
     public function formattedDate(): Attribute
     {
@@ -50,6 +52,11 @@ class TravelPlan extends Model
         }
 
         return Attribute::make(fn() => $formatted_date);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function budgetPlans()

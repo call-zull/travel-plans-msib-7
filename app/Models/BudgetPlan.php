@@ -12,6 +12,7 @@ class BudgetPlan extends Model
         'price',
         'quantity',
         'travel_plan_id',
+        'total',
     ];
 
     // Define relationship with TravelPlan

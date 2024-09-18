@@ -14,8 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('travel_plan_id')->constrained()->onDelete('cascade'); // Foreign key to TravelPlan
             $table->string('item');
-            $table->decimal('price', 12, 2);
+            $table->integer('price');
             $table->integer('quantity');
+            $table->integer('total');
             $table->timestamps();
         });
     }
