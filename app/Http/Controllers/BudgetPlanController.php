@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BudgetPlanRequest;
 use App\Models\BudgetPlan;
 use App\Models\TravelPlan;
 use Illuminate\Http\Request;
@@ -43,13 +44,9 @@ class BudgetPlanController extends Controller
     }
 
 
-    public function store(Request $request, TravelPlan $travelPlan)
+    public function store(BudgetPlanRequest $request, TravelPlan $travelPlan)
     {
-        $data = $request->validate([
-            'item' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'quantity' => 'required|integer',
-        ]);
+        $data = $request->validated();
 
         $data['total'] = $data['price'] * $data['quantity'];
 
@@ -66,21 +63,12 @@ class BudgetPlanController extends Controller
         return view('budget_plans.edit', compact('travelPlan', 'budgetPlan'));
     }
 
-    public function update(Request $request, TravelPlan $travelPlan, $budgetPlanId)
+    public function update(BudgetPlanRequest $request, TravelPlan $travelPlan, $budgetPlanId)
     {
-        $request->validate([
-            'item' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'quantity' => 'required|integer',
-        ]);
+        $data = $request->validated();
 
         $budgetPlan = BudgetPlan::findOrFail($budgetPlanId);
-        $budgetPlan->update([
-            'item' => $request->item,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'total' => $request->price * $request->quantity, // Update the total
-        ]);
+        $budgetPlan->update($data);
 
         notyf('Travel plan deleted successfully!');
         return redirect()->route('travel-plans.budget-plans.index', $travelPlan->id);
