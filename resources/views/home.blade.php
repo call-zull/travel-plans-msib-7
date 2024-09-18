@@ -54,7 +54,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center fw-bold text-uppercase text-symbol">No Travel Plans found.</td>
+                                        <td colspan="8">No Travel Plans found.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

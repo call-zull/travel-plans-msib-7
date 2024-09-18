@@ -38,7 +38,7 @@ class TravelPlanController extends Controller
             });
         }
 
-        return view('home', compact('travelPlans'));
+        return view('travel-plans.index', compact('travelPlans'));
     }
 
     /**
@@ -100,5 +100,16 @@ class TravelPlanController extends Controller
 
         notyf('Travel plan deleted successfully!');
         return to_route('travel-plans.index');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $travelPlans = TravelPlan::with('budgetPlans')
+            ->where(function ($query) use ($search) {
+                $query->where('plan', 'like', '%' . $search . '%');
+            })
+            ->paginate(10);
+        return view('travel-plans.index', compact('travelPlans'));
     }
 }

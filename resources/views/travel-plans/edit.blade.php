@@ -44,6 +44,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary">Update Plan</button>
+                            <a href="{{ route('travel-plans.index') }}" class="btn btn-secondary">Cancel</a>
                         </form>
                     </div>
                 </div>
