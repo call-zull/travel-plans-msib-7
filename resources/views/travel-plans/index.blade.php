@@ -17,7 +17,7 @@
                     <div class="card-header fw-bold text-uppercase text-symbol">{{ __('Travel Plans') }}</div>
 
                     <div class="card-body">
-                        <form action="{{ route('search.plan') }}" method="get">
+                        <form action="{{ route('travel-plans.index') }}" method="get">
                             <input type="text" name="search" id="search" placeholder="Search for travel plans">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>

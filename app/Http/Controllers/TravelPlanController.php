@@ -18,15 +18,19 @@ class TravelPlanController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
         // $travelPlans = TravelPlan::with('budgetPlans')
             // ->withSum('budgetPlans as total_budget', 'total')
         // ->paginate(10);
         $userId = auth()->id();
+        $search = $request->input('search');
         $travelPlans = TravelPlan::with('budgetPlans')
             ->where('user_id', $userId)
-            ->withSum('budgetPlans', 'total') // Filter by logged-in user
+            ->when($search, function ($query, $search) {
+                return $query->where('plan', 'like', '%' . $search . '%');
+            })
+            ->withSum('budgetPlans', 'total')
             ->paginate(10);
 
         // foreach ($travelPlans as $plan) {
@@ -103,6 +107,27 @@ class TravelPlanController extends Controller
         notyf('Travel plan deleted successfully!');
         return to_route('travel-plans.index');
     }
+
+    public function show($id)
+    {
+        $userId = auth()->id();
+
+        // Check if the passed $id is numeric (for showing specific travel plan) or not (for searching by plan name)
+        if (is_numeric($id)) {
+            $travelPlan = TravelPlan::where('user_id', $userId)->findOrFail($id);
+            return view('travel-plans.show', compact('travelPlan'));
+        } else {
+            $search = $id;
+            $travelPlans = TravelPlan::with('budgetPlans')
+                ->where('user_id', $userId)
+                ->where('plan', 'like', '%' . $search . '%')
+                ->withSum('budgetPlans', 'total')
+                ->paginate(10);
+
+            return view('travel-plans.index', compact('travelPlans'));
+        }
+    }
+
 
     public function search(Request $request)
     {

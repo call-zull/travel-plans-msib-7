@@ -31,9 +31,9 @@ class BudgetPlanController extends Controller
         $budgetPlans = $query->get();
 
         // Calculate the total price for each budget item
-        foreach ($budgetPlans as $budgetPlan) {
-            $budgetPlan->total = $budgetPlan->price * $budgetPlan->quantity;
-        }
+        // foreach ($budgetPlans as $budgetPlan) {
+        //     $budgetPlan->total = $budgetPlan->price * $budgetPlan->quantity;
+        // }
 
         return view('budget_plans.index', compact('travelPlan', 'budgetPlans'));
     }
