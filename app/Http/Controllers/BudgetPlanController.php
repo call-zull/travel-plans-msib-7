@@ -25,10 +25,19 @@ class BudgetPlanController extends Controller
         $query = BudgetPlan::where('travel_plan_id', $travelPlan->id);
 
         // filter pencarian jika ada pencarian
-        $search = $request->search;
-        $query->where('item', 'LIKE', "%{$search}%");
+        // $search = $request->search;
+        // $query->where('item', 'LIKE', "%{$search}%");
 
-        $budgetPlans = $query->get();
+        // if ($request->filled('search')) {
+        //     $search = $request->input('search');
+        //     $query->where('item', 'LIKE', "%{$search}%");
+        // }
+
+        $query->when($request->search, function ($query, $search) {
+            $query->where('item', 'LIKE', "%{$search}%");
+        });
+
+        $budgetPlans = $query->paginate(10);
 
         // Calculate the total price for each budget item
         // foreach ($budgetPlans as $budgetPlan) {

@@ -38,20 +38,43 @@ class TravelPlan extends Model
 
     //     return Attribute::make(fn() => $day);
     // }
- 
-    public function formattedDate(): Attribute
-    {
-        $formatted_date = null;
-        $startDate = Carbon::parse($this->start_date);
-        $endDate = Carbon::parse($this->end_date);
 
+    protected function formattedDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->formatDateRange($this->start_date, $this->end_date)
+        );
+    }
+
+    private function formatDateRange($startDate, $endDate)
+    {
         if ($startDate->format('M Y') == $endDate->format('M Y')) {
-            $formatted_date = $startDate->format('d') . ' - ' . $endDate->format('d M Y');
-        } else {
-            $formatted_date = $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y');
+            return $startDate->format('d') . ' - ' . $endDate->format('d M Y');
         }
 
-        return Attribute::make(fn() => $formatted_date);
+        return $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y');
+    }
+
+    // public function formattedDate(): Attribute
+    // {
+    //     $formatted_date = null;
+    //     $startDate = Carbon::parse($this->start_date);
+    //     $endDate = Carbon::parse($this->end_date);
+
+    //     if ($startDate->format('M Y') == $endDate->format('M Y')) {
+    //         $formatted_date = $startDate->format('d') . ' - ' . $endDate->format('d M Y');
+    //     } else {
+    //         $formatted_date = $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y');
+    //     }
+
+    //     return Attribute::make(fn() => $formatted_date);
+    // }
+
+    public static function calculateDays($start_date, $end_date)
+    {
+        $startDate = Carbon::parse($start_date);
+        $endDate = Carbon::parse($end_date);
+        return $startDate->diffInDays($endDate) + 1;
     }
 
     public function user()

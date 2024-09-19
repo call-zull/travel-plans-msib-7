@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1726635371888,
@@ -32,6 +32,18 @@
                 {
                     "date": 1726667407367,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n                 <div class=\"card\">\n                     <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('Travel Plans') }}</div>\n \n                     <div class=\"card-body\">\n-                        <form action=\"{{ route('travel-plans.show', ['travel_plan' => request('search')]) }}\" method=\"get\">\n+                        <form action=\"{{ route('travel-plans.index') }}\" method=\"get\">\n                             <input type=\"text\" name=\"search\" id=\"search\" placeholder=\"Search for travel plans\">\n                             <button type=\"submit\" class=\"btn btn-primary\">Search</button>\n                         </form>\n \n"
+                },
+                {
+                    "date": 1726707089691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n                                         <td>{{ $plan->plan }}</td>\n                                         <td>{{ $plan->categoryDescription }}</td>\n                                         <td>{{ $plan->day }}</td>\n                                         {{-- <td>{{ \\App\\Helpers\\FormatDate::format($plan->start_date, $plan->end_date) }}</td> --}}\n-                                        <td>{{ $plan->formatted_date }}</td>\n+                                        <td>{{ $plan->start_date }}</td>\n                                         {{-- <td>{{ formatMataUang($plan->total_budget) }}</td> --}}\n                                         <td>{{ formatMataUang($plan->budget_plans_sum_total) }}</td>\n                                         <td>\n                                             <a href=\"{{ route('travel-plans.edit', $plan->id) }}\"\n"
+                },
+                {
+                    "date": 1726707116858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n                                         <td>{{ $plan->plan }}</td>\n                                         <td>{{ $plan->categoryDescription }}</td>\n                                         <td>{{ $plan->day }}</td>\n                                         {{-- <td>{{ \\App\\Helpers\\FormatDate::format($plan->start_date, $plan->end_date) }}</td> --}}\n-                                        <td>{{ $plan->start_date }}</td>\n+                                        <td>{{ $plan->formatted_date }}</td>\n                                         {{-- <td>{{ formatMataUang($plan->total_budget) }}</td> --}}\n                                         <td>{{ formatMataUang($plan->budget_plans_sum_total) }}</td>\n                                         <td>\n                                             <a href=\"{{ route('travel-plans.edit', $plan->id) }}\"\n"
+                },
+                {
+                    "date": 1726708479550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n                                         </td>\n                                     </tr>\n                                 @empty\n                                     <tr>\n-                                        <td colspan=\"8\">No Travel Plans found.</td>\n+                                        <td colspan=\"8\" class=\"text-center fw-bold text-uppercase text-symbol\">No Travel Plans found.</td>\n                                     </tr>\n                                 @endforelse\n                             </tbody>\n                         </table>\n"
                 }
             ],
             "date": 1726635371888,
