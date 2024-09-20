@@ -7,6 +7,7 @@ use App\Models\BudgetPlan;
 use App\Models\TravelPlan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class TravelPlanController extends Controller
 {
@@ -18,41 +19,19 @@ class TravelPlanController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index(Request $request)
     {
-        // $travelPlans = TravelPlan::with('budgetPlans')
-            // ->withSum('budgetPlans as total_budget', 'total')
-        // ->paginate(10);
         $userId = auth()->id();
         $query = TravelPlan::with('budgetPlans')
-            ->where('user_id', $userId);
+            ->whereUserId($userId);
 
         // Handle search input
         $query->when($request->search, function ($query, $search) {
             $query->where('plan', 'LIKE', "%{$search}%");
         });
-        $travelPlans = $query->withSum('budgetPlans', 'total')->paginate(10);
-        // $search = $request->input('search');
-        // $search = $request->search;
-        // $travelPlans = TravelPlan::with('budgetPlans')
-        //     ->where('user_id', $userId)
-        //     ->when($search, function ($query, $search) {
-        //         // return $query->where('plan', 'like', '%' . $search . '%');
-        //         return $query->where('plan', 'LIKE', "%{$search}%");
-        //     })
-        //     ->withSum('budgetPlans', 'total')
-        //     ->paginate(10);
 
-        // foreach ($travelPlans as $plan) {
-        //     $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
-        //         return $budgetPlan->price * $budgetPlan->quantity;
-        //     });
-        // }
-        // foreach ($travelPlans as $plan) {
-        //     $plan->total_budget = $plan->budgetPlans->sum(function ($budgetPlan) {
-        //         return $budgetPlan->total;
-        //     });
-        // }
+        $travelPlans = $query->withSum('budgetPlans', 'total')->paginate(10);
 
         return view('travel-plans.index', compact('travelPlans'));
     }
@@ -73,11 +52,8 @@ class TravelPlanController extends Controller
         $data = $request->validated();
 
         $data['user_id'] = auth()->id();
-
-        // $startDate = Carbon::parse($data['start_date']);
-        // $endDate = Carbon::parse($data['end_date']);
-        // $data['day'] = $startDate->diffInDays($endDate) + 1;
         $data['day'] = TravelPlan::calculateDays($data['start_date'], $data['end_date']);
+
         TravelPlan::create($data);
 
         notyf('Travel plan created successfully!');
@@ -98,10 +74,9 @@ class TravelPlanController extends Controller
     public function update(TravelPlanRequest $request, TravelPlan $travelPlan)
     {
         $data = $request->validated();
-        // $startDate = Carbon::parse($data['start_date']);
-        // $endDate = Carbon::parse($data['end_date']);
-        // $data['day'] = $startDate->diffInDays($endDate) + 1;
+
         $data['day'] = TravelPlan::calculateDays($data['start_date'], $data['end_date']);
+
         $travelPlan->update($data);
 
         notyf('Travel plan updated successfully!');
@@ -113,10 +88,15 @@ class TravelPlanController extends Controller
      */
     public function destroy(TravelPlan $travelPlan)
     {
-        $travelPlan->delete();
-
-        notyf('Travel plan deleted successfully!');
-        return to_route('travel-plans.index');
+        try {
+            $travelPlan->delete();
+            notyf('Travel plan deleted successfully!');
+            return to_route('travel-plans.index');
+        } catch (\Exception $e) {
+            Log::error($e);
+            notyf()->addError('Failed to delete travel plan, cuz it has budget plans');
+            return back();
+        }
     }
 
     // public function show($id)
@@ -141,13 +121,13 @@ class TravelPlanController extends Controller
 
 
     //     public function search(Request $request)
-//     {
-//         $search = $request->get('search');
-//         $travelPlans = TravelPlan::with('budgetPlans')
-//             ->where(function ($query) use ($search) {
-//                 $query->where('plan', 'like', '%' . $search . '%');
-//             })
-//             ->paginate(10);
-//         return view('travel-plans.index', compact('travelPlans'));
-//     }
+    //     {
+    //         $search = $request->get('search');
+    //         $travelPlans = TravelPlan::with('budgetPlans')
+    //             ->where(function ($query) use ($search) {
+    //                 $query->where('plan', 'like', '%' . $search . '%');
+    //             })
+    //             ->paginate(10);
+    //         return view('travel-plans.index', compact('travelPlans'));
+    //     }
 }
