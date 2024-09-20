@@ -37,7 +37,7 @@ class BudgetPlanController extends Controller
             $query->where('item', 'LIKE', "%{$search}%");
         });
 
-        $budgetPlans = $query->paginate(10);
+        $budgetPlans = $query->get();
 
         // Calculate the total price for each budget item
         // foreach ($budgetPlans as $budgetPlan) {
