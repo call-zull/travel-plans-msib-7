@@ -15,6 +15,14 @@ class BudgetPlan extends Model
         'total',
     ];
 
+    public function scopeFilter($query, $params)
+    {
+        // search for budget item
+        $query->when(@$params['search'], function ($query, $search) {
+            $query->where('item', 'LIKE', "%{$search}%");
+        });
+    }
+
     // Define relationship with TravelPlan
     public function travelPlan()
     {
