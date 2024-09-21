@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/components/form.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726885514146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726885514146,
+            "name": "Commit-0",
+            "content": "<div class=\"mb-3\">\n    <label for=\"plan\" class=\"form-label\">Plan</label>\n    <input type=\"text\" class=\"form-control @error('plan') is-invalid @enderror\" id=\"plan\" name=\"plan\"\n        value=\"{{ old('plan', @$travelPlan->plan) }}\">\n    @error('plan')\n        <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n    @enderror\n</div>\n\n<div class=\"mb-3\">\n    <label for=\"category\" class=\"form-label\">Category</label>\n    <select class=\"form-control @error('category') @enderror\" id=\"category\" name=\"category\">\n        <option value=\"\">-Select Category-</option>\n        @foreach (\\App\\Enums\\TravelCategoryEnum::asSelectArray() as $key => $item)\n            <option value=\"{{ $key }}\" {{ old('category', @$travelPlan->category) == $key ? 'selected' : '' }}>\n                {{ $item }}\n            </option>\n        @endforeach\n    </select>\n    @error('category')\n        <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n    @enderror\n</div>\n\n<div class=\"mb-3\">\n    <label for=\"start_date\" class=\"form-label\">Start Date</label>\n    <input type=\"date\" class=\"form-control @error('start_date') @enderror\" id=\"start_date\" name=\"start_date\"\n        value=\"{{ old('start_date', @$travelPlan->start_date?->format('Y-m-d')) }}\">\n    @error('start_date')\n        <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n    @enderror\n</div>\n\n<div class=\"mb-3\">\n    <label for=\"end_date\" class=\"form-label\">End Date</label>\n    <input type=\"date\" class=\"form-control @error('end_date') @enderror\" id=\"end_date\" name=\"end_date\"\n        value=\"{{ old('end_date', @$travelPlan->end_date?->format('Y-m-d')) }}\">\n    @error('end_date')\n        <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n    @enderror\n</div>\n"
+        }
+    ]
+}

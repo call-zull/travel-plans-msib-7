@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/partials/font.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726884131393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726884131393,
+            "name": "Commit-0",
+            "content": "<link rel=\"dns-prefetch\" href=\"//fonts.bunny.net\">\r\n<link href=\"https://fonts.bunny.net/css?family=Nunito\" rel=\"stylesheet\">"
+        }
+    ]
+}

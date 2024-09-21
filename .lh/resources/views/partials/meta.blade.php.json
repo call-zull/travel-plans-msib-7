@@ -1,0 +1,22 @@
+{
+    "sourceFile": "resources/views/partials/meta.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1726884008167,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726884019121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,4 @@\n <meta charset=\"utf-8\">\r\n <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n-\r\n-<!-- CSRF Token -->\r\n <meta name=\"csrf-token\" content=\"{{ csrf_token() }}\">\r\n-\r\n <title>{{ config('app.name', 'Laravel') }}</title>\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1726884008166,
+            "name": "Commit-0",
+            "content": "<meta charset=\"utf-8\">\r\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n\r\n<!-- CSRF Token -->\r\n<meta name=\"csrf-token\" content=\"{{ csrf_token() }}\">\r\n\r\n<title>{{ config('app.name', 'Laravel') }}</title>"
+        }
+    ]
+}

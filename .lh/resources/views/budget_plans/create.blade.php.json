@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1726279441234,
@@ -20,6 +20,14 @@
                 {
                     "date": 1726281738105,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,8 @@\n                             <input type=\"number\" class=\"form-control\" id=\"quantity\" name=\"quantity\" required>\r\n                         </div>\r\n                         <button type=\"submit\" class=\"btn btn-primary\">Save Budget Item</button>\r\n                     </form>\r\n-                    \r\n                 </div>\r\n             </div>\r\n         </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1726886867048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,35 +9,9 @@\n \n                     <div class=\"card-body\">\n                         <form action=\"{{ route('travel-plans.budget-plans.store', $travelPlan->id) }}\" method=\"POST\">\n                             @csrf\n-                            <div class=\"mb-3\">\n-                                <label for=\"item\" class=\"form-label\">Item</label>\n-                                <input type=\"text\" class=\"form-control @error('item') is-invalid @enderror\"\n-                                    id=\"item\" name=\"item\" value=\"{{ old('item') }}\">\n-\n-                                @error('item')\n-                                    <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n-                                @enderror\n-                            </div>\n-                            <div class=\"mb-3\">\n-                                <label for=\"price\" class=\"form-label\">Price</label>\n-                                <input type=\"number\" class=\"form-control @error('price') is-invalid @enderror\"\n-                                    id=\"price\" name=\"price\" value=\"{{ old('price') }}\">\n-\n-                                @error('price')\n-                                    <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n-                                @enderror\n-                            </div>\n-                            <div class=\"mb-3\">\n-                                <label for=\"quantity\" class=\"form-label\">Quantity</label>\n-                                <input type=\"number\" class=\"form-control @error('quantity') is-invalid @enderror\"\n-                                    id=\"quantity\" name=\"quantity\" value=\"{{ old('quantity') }}\">\n-\n-                                @error('quantity')\n-                                    <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n-                                @enderror\n-                            </div>\n+                            @include('budget_plans.form')\n                             <button type=\"submit\" class=\"btn btn-primary\">Save Budget Item</button>\n                             <a href=\"{{ route('travel-plans.budget-plans.index', $travelPlan->id) }}\"\n                                 class=\"btn btn-secondary\">Cancel</a>\n                         </form>\n"
+                },
+                {
+                    "date": 1726887242011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \n                     <div class=\"card-body\">\n                         <form action=\"{{ route('travel-plans.budget-plans.store', $travelPlan->id) }}\" method=\"POST\">\n                             @csrf\n-                            @include('budget_plans.form')\n+                            @include('budget_plans._form')\n                             <button type=\"submit\" class=\"btn btn-primary\">Save Budget Item</button>\n                             <a href=\"{{ route('travel-plans.budget-plans.index', $travelPlan->id) }}\"\n                                 class=\"btn btn-secondary\">Cancel</a>\n                         </form>\n"
                 }
             ],
             "date": 1726279441234,
