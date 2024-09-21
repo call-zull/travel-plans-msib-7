@@ -20,9 +20,22 @@
                         <form action="{{ route('travel-plans.index') }}" method="get" class="mb-3">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <input type="text" name="search" id="search" class="form-control"
+                                    <input type="text" name="plan" id="plan" class="form-control"
                                         placeholder="Search for travel plans">
                                 </div>
+
+                                <div class="col-lg-2">
+                                    <select class="form-control" id="category" name="category">
+                                        <option value="">-Select Category-</option>
+                                        @foreach (\App\Enums\TravelCategoryEnum::asSelectArray() as $key => $item)
+                                            <option value="{{ $key }}"
+                                                {{ old('category', @$travelPlan->category) == $key ? 'selected' : '' }}>
+                                                {{ $item }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="col-lg-3">
                                     <button type="submit" class="btn btn-primary">Search</button>
                                 </div>

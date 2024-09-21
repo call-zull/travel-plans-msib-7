@@ -55,20 +55,14 @@ class TravelPlan extends Model
         return $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y');
     }
 
-    // public function formattedDate(): Attribute
-    // {
-    //     $formatted_date = null;
-    //     $startDate = Carbon::parse($this->start_date);
-    //     $endDate = Carbon::parse($this->end_date);
-
-    //     if ($startDate->format('M Y') == $endDate->format('M Y')) {
-    //         $formatted_date = $startDate->format('d') . ' - ' . $endDate->format('d M Y');
-    //     } else {
-    //         $formatted_date = $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y');
-    //     }
-
-    //     return Attribute::make(fn() => $formatted_date);
-    // }
+    public function scopeFilter($query, $params)
+    {
+        // search for budget item
+        $query->when(@$params['plan'] ?? @$params['category'], function ($query, $search) {
+            $query->where('plan', 'LIKE', "%{$search}%")
+            ->orwhere('category', 'LIKE', "%{$search}%");
+        });
+    }
 
     public static function calculateDays($start_date, $end_date)
     {

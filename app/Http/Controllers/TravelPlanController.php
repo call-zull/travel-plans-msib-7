@@ -26,12 +26,8 @@ class TravelPlanController extends Controller
         $query = TravelPlan::with('budgetPlans')
             ->whereUserId($userId);
 
-        // Handle search input
-        $query->when($request->search, function ($query, $search) {
-            $query->where('plan', 'LIKE', "%{$search}%");
-        });
-
-        $travelPlans = $query->withSum('budgetPlans', 'total')->paginate(10);
+        $params = request()->query();
+        $travelPlans = $query->filter($params)->withSum('budgetPlans', 'total')->paginate(10);
 
         return view('travel-plans.index', compact('travelPlans'));
     }
