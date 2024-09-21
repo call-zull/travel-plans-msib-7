@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1726281146498,
@@ -16,6 +16,14 @@
                 {
                     "date": 1726623136295,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n             <div class=\"card\">\r\n                 <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('Edit Budget Plan') }}</div>\r\n \r\n                 <div class=\"card-body\">\r\n-                    <form action=\"{{ route('travel-plans.budget-plans.update', $budgetPlan->id) }}\" method=\"POST\">\r\n+                    <form action=\"{{ route('travel-plans.budget-plans.update', [$budgetPlan->travel_plan_id, $budgetPlan->id]) }}\" method=\"POST\">\r\n+\r\n                         @csrf\r\n                         @method('PUT')\r\n                         \r\n                         <div class=\"mb-3\">\r\n"
+                },
+                {
+                    "date": 1726886173289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,37 +11,10 @@\n                     <form action=\"{{ route('travel-plans.budget-plans.update', [$budgetPlan->travel_plan_id, $budgetPlan->id]) }}\" method=\"POST\">\n                         @csrf\n                         @method('PUT')\n \n-                        <div class=\"mb-3\">\n-                            <label for=\"item\" class=\"form-label\">Item</label>\n-                            <input type=\"text\" class=\"form-control\" id=\"item\" name=\"item\" value=\"{{ old('item', $budgetPlan->item) }}\">\n+                      \n \n-                            @error('item')\n-                                <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n-                            @enderror\n-                        </div>\n-\n-                        <div class=\"mb-3\">\n-                            <label for=\"price\" class=\"form-label\">Price</label>\n-                            <input type=\"number\" class=\"form-control\" id=\"price\" name=\"price\" value=\"{{ old('price', $budgetPlan->price) }}\" step=\"0.01\">\n-\n-                            @error('price')\n-                                <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n-                            @enderror\n-                        </div>\n-\n-                        <div class=\"mb-3\">\n-                            <label for=\"quantity\" class=\"form-label\">Quantity</label>\n-                            <input type=\"number\" class=\"form-control\" id=\"quantity\" name=\"quantity\" value=\"{{ old('quantity', $budgetPlan->quantity) }}\">\n-\n-                            @error('quantity')\n-                                <div class=\"invalid-feedback d-block\">{{ $message }}</div>\n-                            @enderror\n-                        </div>\n-\n-                        <input type=\"hidden\" name=\"travel_plan_id\" value=\"{{ $budgetPlan->travel_plan_id }}\">\n-\n                         <button type=\"submit\" class=\"btn btn-primary\">Update Budget Item</button>\n                     </form>\n                 </div>\n             </div>\n"
+                },
+                {
+                    "date": 1726886835136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,24 @@\n+@extends('layouts.app')\n+\n+@section('content')\n+<div class=\"container\">\n+    <div class=\"row justify-content-center\">\n+        <div class=\"col-md-10\">\n+            <div class=\"card\">\n+                <div class=\"card-header fw-bold text-uppercase text-symbol\">{{ __('Edit Budget Plan') }}</div>\n+\n+                <div class=\"card-body\">\n+                    <form action=\"{{ route('travel-plans.budget-plans.update', [$budgetPlan->travel_plan_id, $budgetPlan->id]) }}\" method=\"POST\">\n+                        @csrf\n+                        @method('PUT')\n+\n+                        @include('budget_plans.form')\n+\n+                        <button type=\"submit\" class=\"btn btn-primary\">Update Budget Item</button>\n+                    </form>\n+                </div>\n+            </div>\n+        </div>\n+    </div>\n+</div>\n+@endsection\n"
                 }
             ],
             "date": 1726281146498,

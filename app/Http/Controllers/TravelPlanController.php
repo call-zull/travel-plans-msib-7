@@ -8,6 +8,7 @@ use App\Models\TravelPlan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class TravelPlanController extends Controller
 {
@@ -98,36 +99,4 @@ class TravelPlanController extends Controller
             return back();
         }
     }
-
-    // public function show($id)
-    // {
-    //     $userId = auth()->id();
-
-    //     // Check if the passed $id is numeric (for showing specific travel plan) or not (for searching by plan name)
-    //     if (is_numeric($id)) {
-    //         $travelPlan = TravelPlan::where('user_id', $userId)->findOrFail($id);
-    //         return view('travel-plans.show', compact('travelPlan'));
-    //     } else {
-    //         $search = $id;
-    //         $travelPlans = TravelPlan::with('budgetPlans')
-    //             ->where('user_id', $userId)
-    //             ->where('plan', 'like', '%' . $search . '%')
-    //             ->withSum('budgetPlans', 'total')
-    //             ->paginate(10);
-
-    //         return view('travel-plans.index', compact('travelPlans'));
-    //     }
-    // }
-
-
-    //     public function search(Request $request)
-    //     {
-    //         $search = $request->get('search');
-    //         $travelPlans = TravelPlan::with('budgetPlans')
-    //             ->where(function ($query) use ($search) {
-    //                 $query->where('plan', 'like', '%' . $search . '%');
-    //             })
-    //             ->paginate(10);
-    //         return view('travel-plans.index', compact('travelPlans'));
-    //     }
 }

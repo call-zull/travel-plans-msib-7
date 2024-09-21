@@ -44,11 +44,12 @@ class BudgetPlanController extends Controller
     public function update(BudgetPlanRequest $request, TravelPlan $travelPlan, $budgetPlanId)
     {
         $data = $request->validated();
+        $data['total'] = $data['price'] * $data['quantity'];
 
         $budgetPlan = BudgetPlan::findOrFail($budgetPlanId);
         $budgetPlan->update($data);
 
-        notyf('Travel plan deleted successfully!');
+        notyf('Budget Plan updated successfully!');
         return redirect()->route('travel-plans.budget-plans.index', $travelPlan->id);
     }
 
