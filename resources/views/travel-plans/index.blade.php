@@ -62,7 +62,6 @@
                                             <td>{{ $plan->plan }}</td>
                                             <td>{{ $plan->categoryDescription }}</td>
                                             <td>{{ $plan->day }}</td>
-                                            {{-- <td>{{ \App\Helpers\FormatDate::format($plan->start_date, $plan->end_date) }}</td> --}}
                                             <td>{{ $plan->formatted_date }}</td>
                                             <td>{{ formatMataUang($plan->budget_plans_sum_total) }}</td>
                                             <td>
@@ -75,8 +74,13 @@
                                                     <button type="submit" class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                                                 </form>
+
+                                                <!-- Button to trigger the modal -->
                                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#modal">Detail</button>
+                                                    data-bs-target="#modalasa{{ $plan->id }}">
+                                                    Detail
+                                                </button>
+
                                                 <a href="{{ route('travel-plans.budget-plans.index', $plan->id) }}"
                                                     class="btn btn-sm btn-warning">Budget Plan</a>
                                             </td>
@@ -89,27 +93,51 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
                         </div>
-                        {{ $travelPlans->links() }}
+                        {{-- {{ $travelPlans->links() }} --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Unik untuk Setiap Plan -->
+    <div class="modal fade" id="modalasa{{ $plan->id }}" tabindex="-1"
+        aria-labelledby="exampleModalLabel{{ $plan->id }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $plan->id }}">Detail Travel Plan:
+                        {{ $plan->plan }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Plan</th>
+                            <td>{{ $plan->plan }}</td>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td>{{ $plan->categoryDescription }}</td>
+                        </tr>
+                        <tr>
+                            <th>Day</th>
+                            <td>{{ $plan->day }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td>{{ $plan->formatted_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Budget</th>
+                            <td>{{ formatMataUang($plan->budget_plans_sum_total) }}</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

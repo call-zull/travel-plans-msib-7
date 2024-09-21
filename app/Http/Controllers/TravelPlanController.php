@@ -28,8 +28,8 @@ class TravelPlanController extends Controller
             ->whereUserId($userId);
 
         $params = request()->query();
-        $travelPlans = $query->filter($params)->withSum('budgetPlans', 'total')->paginate(10);
-
+        $travelPlans = $query->filter($params)->withSum('budgetPlans', 'total')->get();
+        // return $travelPlans; 
         return view('travel-plans.index', compact('travelPlans'));
     }
 
