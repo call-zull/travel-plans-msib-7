@@ -67,13 +67,16 @@
                                             <td>
                                                 <a href="{{ route('travel-plans.edit', $plan->id) }}"
                                                     class="btn btn-sm btn-success">Edit</a>
-                                                <form action="{{ route('travel-plans.destroy', $plan->id) }}"
+
+                                                    <a href="{{ route('travel-plans.destroy', $plan->id) }}"
+                                                        class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
+                                                {{-- <form action="{{ route('travel-plans.destroy', $plan->id) }}"
                                                     method="POST" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
-                                                </form>
+                                                </form> --}}
 
                                                 <!-- Button to trigger the modal -->
                                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal"

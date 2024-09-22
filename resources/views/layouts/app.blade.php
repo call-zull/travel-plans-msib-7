@@ -6,6 +6,7 @@
    @include('partials.font')
    @include('partials.scripts')
    @stack('scripts')
+   @include('sweetalert::alert')
 </head>
 
 <body>

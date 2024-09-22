@@ -47,14 +47,9 @@
                                             <td>
                                                 <a href="{{ route('travel-plans.budget-plans.edit', [$travelPlan->id, $budget->id]) }}"
                                                     class="btn btn-sm btn-success">Edit</a>
-                                                <form
-                                                    action="{{ route('travel-plans.budget-plans.destroy', [$travelPlan->id, $budget->id]) }}"
-                                                    method="POST" style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this budget item?')">Delete</button>
-                                                </form>
+
+                                                <a href="{{ route('travel-plans.budget-plans.destroy', [$travelPlan->id, $budget->id]) }}"
+                                                    class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
                                             </td>
                                         </tr>
                                     @empty

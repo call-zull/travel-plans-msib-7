@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\DateHelper;
 use App\Http\Requests\TravelPlanRequest;
-use App\Models\BudgetPlan;
 use App\Models\TravelPlan;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 
 class TravelPlanController extends Controller
 {
@@ -29,7 +27,10 @@ class TravelPlanController extends Controller
 
         $params = request()->query();
         $travelPlans = $query->filter($params)->withSum('budgetPlans', 'total')->get();
-        // return $travelPlans; 
+
+        $title = 'Delete !';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('travel-plans.index', compact('travelPlans'));
     }
 
@@ -49,7 +50,7 @@ class TravelPlanController extends Controller
         $data = $request->validated();
 
         $data['user_id'] = auth()->id();
-        $data['day'] = TravelPlan::calculateDays($data['start_date'], $data['end_date']);
+        $data['day'] = DateHelper::calculateDays($data['start_date'], $data['end_date']);
 
         TravelPlan::create($data);
 
@@ -72,7 +73,7 @@ class TravelPlanController extends Controller
     {
         $data = $request->validated();
 
-        $data['day'] = TravelPlan::calculateDays($data['start_date'], $data['end_date']);
+        $data['day'] = DateHelper::calculateDays($data['start_date'], $data['end_date']);
 
         $travelPlan->update($data);
 

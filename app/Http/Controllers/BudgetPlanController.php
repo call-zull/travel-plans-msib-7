@@ -14,6 +14,9 @@ class BudgetPlanController extends Controller
         $params = request()->query();
         $budgetPlans = $travelPlan->budgetPlans()->filter($params)->get();
 
+        $title = 'Delete !';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('budget_plans.index', compact('travelPlan', 'budgetPlans'));
     }
 

@@ -64,13 +64,6 @@ class TravelPlan extends Model
         });
     }
 
-    public static function calculateDays($start_date, $end_date)
-    {
-        $startDate = Carbon::parse($start_date);
-        $endDate = Carbon::parse($end_date);
-        return $startDate->diffInDays($endDate) + 1;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
