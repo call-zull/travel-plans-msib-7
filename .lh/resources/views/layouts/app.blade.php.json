@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1726193096784,
@@ -52,6 +52,14 @@
                 {
                     "date": 1726886036902,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n </head>\n \n <body>\n     <div id=\"app\">\n-      \n+      <x-navbar />\n \n         <main class=\"py-4\">\n             @yield('content')\n         </main>\n"
+                },
+                {
+                    "date": 1726896271138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     <div id=\"app\">\n       <x-navbar />\n \n         <main class=\"py-4\">\n-            @yield('content')\n+           {{ $slot }}\n         </main>\n     </div>\n </body>\n </html>\n"
+                },
+                {
+                    "date": 1726896500757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     <div id=\"app\">\n       <x-navbar />\n \n         <main class=\"py-4\">\n-           {{ $slot }}\n+            @yield('content')\n         </main>\n     </div>\n </body>\n </html>\n"
                 }
             ],
             "date": 1726193096784,
