@@ -49,7 +49,7 @@
                                                     class="btn btn-sm btn-success">Edit</a>
 
                                                 <a href="{{ route('travel-plans.budget-plans.destroy', [$travelPlan->id, $budget->id]) }}"
-                                                    class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
+                                                    class="btn btn-sm btn-danger" data-confirm-delete="true">Hapus</a>
                                             </td>
                                         </tr>
                                     @empty
