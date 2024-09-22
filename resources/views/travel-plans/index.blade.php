@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -72,7 +70,8 @@
                                                     class="btn btn-sm btn-danger" data-confirm-delete="true">Hapus</a>
 
                                                 <!-- Button to trigger modal -->
-                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    data-bs-toggle="modal"
                                                     data-bs-target="#modalBudgetPlan{{ $plan->id }}">
                                                     Details
                                                 </button>
@@ -146,7 +145,8 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="4" class="text-center">No plans for this trip.</td>
+                                                        <td colspan="4" class="text-center">No plans for this trip.
+                                                        </td>
                                                     </tr>
                                                 @endforelse
                                             </tbody>
@@ -169,4 +169,4 @@
             </div>
         </div>
     @endforeach
-@endsection
+</x-app-layout>
