@@ -35,4 +35,16 @@ class TravelPlanRequest extends FormRequest
             'plan' => 'Travel Plan',
         ];
     }
+
+
+    public function messages()
+    {
+        return [
+            'plan.required' => 'Field :attribute tidak boleh kosong.',
+            'category.required' => 'Field kategori harus dipilih.',
+            'start_date.required' => 'Tanggal mulai harus diisi.',
+            'end_date.required' => 'Tanggal akhir harus diisi.',
+            'end_date.after_or_equal' => 'Tanggal akhir harus sama atau setelah tanggal mulai.',
+        ];
+    }
 }
