@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 23,
+            "activePatchIndex": 25,
             "patches": [
                 {
                     "date": 1726635371888,
@@ -100,6 +100,14 @@
                 {
                     "date": 1726968863268,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n                     <tbody>\n                         @forelse($plan->budgetPlans as $budgetPlan)\n                         <tr>\n                             <td>{{ $budgetPlan->item }}</td>\n-                            <td>{{ formatCurrency($budgetPlan->price) }}</td>\n+                            <td>{{ formatMataUang($budgetPlan->price) }}</td>\n                             <td>{{ $budgetPlan->quantity }}</td>\n                             <td>{{ formatMataUang($budgetPlan->total) }}</td>\n                         </tr>\n                         @empty\n"
+                },
+                {
+                    "date": 1726969093339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n-@extends('layouts.app')\n-\n+{{-- @extends('layouts.app') --}}\n+<x-app-layout>\n @section('content')\n <div class=\"container\">\n     <div class=\"row justify-content-center\">\n         <div class=\"col-md-12\">\n@@ -125,4 +125,5 @@\n </div>\n @endforeach\n \n @endsection\n+<x-app-layout>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726969612088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n-{{-- @extends('layouts.app') --}}\n-<x-app-layout>\n+@extends('layouts.app')\n+\n @section('content')\n <div class=\"container\">\n     <div class=\"row justify-content-center\">\n         <div class=\"col-md-12\">\n@@ -125,5 +125,4 @@\n </div>\n @endforeach\n \n @endsection\n-<x-app-layout>\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1726635371888,

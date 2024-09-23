@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1726193096784,
@@ -60,6 +60,22 @@
                 {
                     "date": 1726896500757,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     <div id=\"app\">\n       <x-navbar />\n \n         <main class=\"py-4\">\n-           {{ $slot }}\n+            @yield('content')\n         </main>\n     </div>\n </body>\n </html>\n"
+                },
+                {
+                    "date": 1726969038865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,10 @@\n     <div id=\"app\">\n       <x-navbar />\n \n         <main class=\"py-4\">\n-            @yield('content')\n+            {{-- @yield('content') --}}\n+            {{ $slot  }}\n         </main>\n     </div>\n </body>\n </html>\n"
+                },
+                {
+                    "date": 1726969605763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,9 @@\n     <div id=\"app\">\n       <x-navbar />\n \n         <main class=\"py-4\">\n-            {{-- @yield('content') --}}\n-            {{ $slot  }}\n+            @yield('content')\n         </main>\n     </div>\n </body>\n </html>\n"
+                },
+                {
+                    "date": 1727052379423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,9 @@\n <!doctype html>\n <html lang=\"{{ str_replace('_', '-', app()->getLocale()) }}\">\n \n <head>\n-    <meta charset=\"utf-8\">\n-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n-    <meta name=\"csrf-token\" content=\"{{ csrf_token() }}\">\n-    <title>{{ config('app.name', 'Laravel') }}</title>\n+    \n     @include('layouts.css')\n     @vite(['resources/sass/app.scss', 'resources/js/app.js'])\n     {{-- @stack('scripts') --}}\n </head>\n"
+                },
+                {
+                    "date": 1727052443109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \n <body>\n     <div id=\"app\">\n         @include('sweetalert::alert')\n-        @include('layouts.navbar')\n+        <x-navbar />\n \n         <main class=\"py-4\">\n             {{$slot}}\n         </main>\n"
                 }
             ],
             "date": 1726193096784,

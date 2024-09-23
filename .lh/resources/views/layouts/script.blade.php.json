@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/layouts/script.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1727053006119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1727053006119,
+            "name": "Commit-0",
+            "content": "<link rel=\"dns-prefetch\" href=\"//fonts.bunny.net\">\r\n<link href=\"https://fonts.bunny.net/css?family=Nunito\" rel=\"stylesheet\">\r\n@vite(['resources/sass/app.scss', 'resources/js/app.js'])\r\n"
+        }
+    ]
+}
