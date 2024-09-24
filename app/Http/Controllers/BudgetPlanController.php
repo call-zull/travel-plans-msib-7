@@ -6,6 +6,7 @@ use App\Http\Requests\BudgetPlanRequest;
 use App\Models\BudgetPlan;
 use App\Models\TravelPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BudgetPlanController extends Controller
 {
@@ -14,9 +15,6 @@ class BudgetPlanController extends Controller
         $params = request()->query();
         $budgetPlans = $travelPlan->budgetPlans()->filter($params)->get();
 
-        $title = 'Delete !';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
         return view('budget_plans.index', compact('travelPlan', 'budgetPlans'));
     }
 
@@ -58,9 +56,18 @@ class BudgetPlanController extends Controller
 
     public function destroy(TravelPlan $travelPlan, BudgetPlan $budgetPlan)
     {
-        $budgetPlan->delete();
+        try {
+            $budgetPlan->delete();
 
-        notyf('Budget item deleted successfully!');
-        return redirect()->route('travel-plans.budget-plans.index', $travelPlan);
+            return response()->json([
+                'message' => 'Budget item deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response()->json([
+                'message' => 'Failed to delete budget item, cuz it has budget plans',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
