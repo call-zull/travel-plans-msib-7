@@ -3,19 +3,21 @@
 
 <head>
     @include('includes.meta')
-    @include('includes.scripts')
-    @stack('scripts')
+    @include('includes.styles')
+    @stack('styles')
 </head>
 
 <body>
     <div id="app">
-        @include('sweetalert::alert')
+        @include('includes.actions.sweetalert-delete')
         <x-navbar />
 
         <main class="py-4">
-            {{$slot}}
+            {{ $slot }}
         </main>
     </div>
+    @include('includes.scripts')
+    @stack('scripts')
 </body>
 
 </html>

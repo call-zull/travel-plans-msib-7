@@ -1,9 +1,22 @@
 <x-app-layout>
+    @push('styles')
+        <style>
+            .text-symbol {
+                color: var(--bs-primary);
+            }
+        </style>
+    @endpush
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <a href="{{ route('travel-plans.index') }}" class="btn btn-warning mb-3">Home</a>
                 <a href="{{ route('travel-plans.create') }}" class="btn btn-primary mb-3">Add Plan</a>
+
+                <div class="mb-3">
+                    <x-button.primary>Button Primary</x-button.primary>
+                    <x-button class="btn-danger">Button Danger</x-button>
+                    <x-button class="btn-success">Button Success</x-button>
+                </div>
 
                 @if (Session::get('status'))
                     <div class="alert alert-success">
@@ -63,16 +76,26 @@
                                             <td>{{ $plan->formatted_date }}</td>
                                             <td>{{ formatMataUang($plan->budget_plans_sum_total) }}</td>
                                             <td>
-                                                <a href="{{ route('travel-plans.edit', $plan->id) }}"
-                                                    class="btn btn-sm btn-success">Edit</a>
+                                                {{-- <a href="{{ route('travel-plans.edit', $plan->id) }}"
+                                                    class="btn btn-sm btn-success">Edit</a> --}}
+
+                                                <button type="button" class="btn btn-success btn-sm"
+                                                    data-url="{{ route('travel-plans.edit', $plan->id) }}"
+                                                    data-title="Edit Budget Plan {{ $plan->plan }}"
+                                                    data-bs-toggle="modal" data-bs-target=".edit-plan-modal">
+                                                    Edit
+                                                </button>
 
                                                 <a href="{{ route('travel-plans.destroy', $plan->id) }}"
-                                                    class="btn btn-sm btn-danger" data-confirm-delete="true">Hapus</a>
+                                                    class="btn btn-sm btn-danger" data-sweetalert-delete
+                                                    data-title="Delete!"
+                                                    data-text="Are you sure you want to delete {{ $plan->plan }}?">Hapus</a>
 
                                                 <!-- Button to trigger modal -->
                                                 <button type="button" class="btn btn-primary btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modalBudgetPlan{{ $plan->id }}">
+                                                    data-url="{{ route('travel-plans.show', $plan->id) }}"
+                                                    data-title="Budget Plan {{ $plan->plan }}" data-bs-toggle="modal"
+                                                    data-bs-target=".show-plan-modal">
                                                     Details
                                                 </button>
 
@@ -89,84 +112,13 @@
                                 </tbody>
                             </table>
                         </div>
+                        <x-pagination :data="$travelPlans" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal for each travel plan -->
-    @foreach ($travelPlans as $plan)
-        <div class="modal fade" id="modalBudgetPlan{{ $plan->id }}" tabindex="-1"
-            aria-labelledby="labelModalBudgetPlan{{ $plan->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="labelModalBudgetPlan{{ $plan->id }}">Budget Plan Details:
-                            {{ $plan->plan }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h2>{{ $plan->plan }}</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Plan</th>
-                                        <th>Category</th>
-                                        <th>Day</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <td>{{ $plan->plan }}</td>
-                                    <td>{{ $plan->categoryDescription }}</td>
-                                    <td>{{ $plan->day }}</td>
-                                    <td>{{ $plan->formatted_date }}</td>
-                                </tbody>
-                                <tfoot>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse ($plan->budgetPlans as $budgetPlan)
-                                                    <tr>
-                                                        <td>{{ $budgetPlan->item }}</td>
-                                                        <td>{{ formatMataUang($budgetPlan->price) }}</td>
-                                                        <td>{{ $budgetPlan->quantity }}</td>
-                                                        <td>{{ formatMataUang($budgetPlan->total) }}</td>
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="4" class="text-center">No plans for this trip.
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th colspan="3">Total Budget</th>
-                                                    <th>{{ formatMataUang($plan->budgetPlans->sum('total')) }}</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
+    <x-modal.show class="edit-plan-modal" />
+    <x-modal.show class="show-plan-modal" size="modal-lg" />
 </x-app-layout>

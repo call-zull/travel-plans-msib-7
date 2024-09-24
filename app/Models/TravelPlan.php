@@ -58,9 +58,13 @@ class TravelPlan extends Model
     public function scopeFilter($query, $params)
     {
         // search for budget item
-        $query->when(@$params['plan'] ?? @$params['category'], function ($query, $search) {
-            $query->where('plan', 'LIKE', "%{$search}%")
-            ->orwhere('category', 'LIKE', "%{$search}%");
+        $query->when(@$params['plan'], function ($query, $search) {
+            $query->where('plan', 'LIKE', "%{$search}%");
+        });
+
+        // filter by category
+        $query->when(@$params['category'], function ($query, $category) {
+            $query->where('category', $category);
         });
     }
 

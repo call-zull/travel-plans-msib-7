@@ -22,15 +22,14 @@ class TravelPlanController extends Controller
     public function index(Request $request)
     {
         $userId = auth()->id();
-        $query = TravelPlan::with('budgetPlans')
-            ->whereUserId($userId);
-
         $params = request()->query();
-        $travelPlans = $query->filter($params)->withSum('budgetPlans', 'total')->get();
 
-        $title = 'Delete !';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
+        $travelPlans = TravelPlan::with('budgetPlans')
+            ->withSum('budgetPlans', 'total')
+            ->whereUserId($userId)
+            ->filter($params)
+            ->paginate(10);
+
         return view('travel-plans.index', compact('travelPlans'));
     }
 
@@ -56,6 +55,11 @@ class TravelPlanController extends Controller
 
         notyf('Travel plan created successfully!');
         return to_route('travel-plans.index');
+    }
+
+    public function show(TravelPlan $travelPlan)
+    {
+        return view('travel-plans.show', compact('travelPlan'));
     }
 
     /**
@@ -88,12 +92,16 @@ class TravelPlanController extends Controller
     {
         try {
             $travelPlan->delete();
-            notyf('Travel plan deleted successfully!');
-            return to_route('travel-plans.index');
+
+            return response()->json([
+                'message' => 'Travel plan deleted successfully!'
+            ]);
         } catch (\Exception $e) {
             Log::error($e);
-            notyf()->addError('Failed to delete travel plan, cuz it has budget plans');
-            return back();
+            return response()->json([
+                'message' => 'Failed to delete travel plan, cuz it has budget plans',
+                'error' => $e->getMessage(),
+            ], 500);
         }
     }
 }

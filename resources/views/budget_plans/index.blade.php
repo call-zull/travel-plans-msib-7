@@ -3,7 +3,8 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <a href="{{ route('travel-plans.index') }}" class="btn btn-warning mb-3">Back</a>
-                <a href="{{ route('travel-plans.budget-plans.create', $travelPlan->id) }}" class="btn btn-primary mb-3">Add
+                <a href="{{ route('travel-plans.budget-plans.create', $travelPlan->id) }}"
+                    class="btn btn-primary mb-3">Add
                     Budget Item</a>
                 <div class="card bg-white">
                     <div class="card-header fw-bold text-uppercase text-symbol">{{ __('Budget Items') }}</div>
@@ -47,7 +48,9 @@
                                                     class="btn btn-sm btn-success">Edit</a>
 
                                                 <a href="{{ route('travel-plans.budget-plans.destroy', [$travelPlan->id, $budget->id]) }}"
-                                                    class="btn btn-sm btn-danger" data-confirm-delete="true">Hapus</a>
+                                                    class="btn btn-sm btn-danger" data-sweetalert-delete
+                                                    data-title="Delete!"
+                                                    data-text="Are you sure you want to delete {{ $budget->item }}?">Hapus</a>
                                             </td>
                                         </tr>
                                     @empty
@@ -73,5 +76,12 @@
             </div>
         </div>
     </div>
-</x-app-layout>
 
+    @push('styles')
+        <style>
+            .text-symbol {
+                color: var(--bs-danger);
+            }
+        </style>
+    @endpush
+</x-app-layout>
