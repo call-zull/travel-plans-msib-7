@@ -8,15 +8,25 @@
 </head>
 
 <body>
-    <div id="app">
-        @include('includes.actions.sweetalert-delete')
-        <x-navbar />
+    @include('includes.actions.sweetalert-delete')
 
-        <main class="py-4">
+    <div id="db-wrapper">
+        <!-- navbar vertical -->
+        @auth
+            @include('layouts.navbar-vertical')
+
+            <div id="page-content">
+
+                @include('layouts.header')
+            @endauth
+
             {{ $slot }}
-        </main>
+
+            @include('layouts.footer')
+        </div>
     </div>
-    @include('includes.scripts')
+    <!-- Scripts -->
+    @include('layouts.scripts')
     @stack('scripts')
 </body>
 
