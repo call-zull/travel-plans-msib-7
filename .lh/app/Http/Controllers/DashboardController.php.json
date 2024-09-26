@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Controllers/DashboardController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1727315200358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727317578472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n <?php\n \n namespace App\\Http\\Controllers;\n \n+use App\\Models\\TravelPlan;\n+use App\\Models\\BudgetPlan;\n use Illuminate\\Http\\Request;\n \n class DashboardController extends Controller\n {\n@@ -22,7 +24,17 @@\n      * @return \\Illuminate\\Contracts\\Support\\Renderable\n      */\n     public function index()\n     {\n-        return view('dashboard');\n+        // Dapatkan user ID yang sedang login\n+        $userId = auth()->id();\n+\n+        // Hitung jumlah travel plan dan budget plan berdasarkan user ID\n+        $totalTravelPlans = TravelPlan::where('user_id', $userId)->count();\n+        $totalBudgetPlans = BudgetPlan::whereHas('travelPlan', function ($query) use ($userId) {\n+            $query->where('user_id', $userId);\n+        })->count();\n+\n+        // Kirim data ke view\n+        return view('dashboard', compact('totalTravelPlans', 'totalBudgetPlans'));\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1727315200358,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\n\nclass DashboardController extends Controller\n{\n    /**\n     * Create a new controller instance.\n     *\n     * @return void\n     */\n    public function __construct()\n    {\n        $this->middleware('auth');\n    }\n\n    /**\n     * Show the application dashboard.\n     *\n     * @return \\Illuminate\\Contracts\\Support\\Renderable\n     */\n    public function index()\n    {\n        return view('dashboard');\n    }\n}"
+        }
+    ]
+}

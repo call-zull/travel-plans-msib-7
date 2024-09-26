@@ -1,4 +1,4 @@
-@include('dashboard.layouts.styles')
+@include('includes.styles')
 <div class="container min-vh-100 d-flex justify-content-center align-items-center">
     <!-- row -->
     <div class="row">

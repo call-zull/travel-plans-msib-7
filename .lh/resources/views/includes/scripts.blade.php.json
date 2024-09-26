@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1727053057676,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727316408483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,12 @@\n \n <script src=\"{{ asset('assets') }}/js/feather.js\"></script>\n <script src=\"{{ asset('assets') }}/js/main.js\"></script>\n <script src=\"{{ asset('assets') }}/js/sidebarMenu.js\"></script>\n+<script>\n+    feather.replace();\n+</script>\n \n <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>\n <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\n     integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\">\n </script>\n-\n"
+                },
+                {
+                    "date": 1727318373160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+<link rel=\"stylesheet\" href=\"{{ asset('assets') }}\">\n+\n+<script src=\"{{ asset('assets') }}/js/feather.js\"></script>\n+<script src=\"{{ asset('assets') }}/js/main.js\"></script>\n+<script src=\"{{ asset('assets') }}/js/sidebarMenu.js\"></script>\n+<script>\n+    feather.replace();\n+</script>\n+\n+<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>\n+<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\n+    integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\">\n+</script>\n"
                 }
             ],
             "date": 1727053057676,

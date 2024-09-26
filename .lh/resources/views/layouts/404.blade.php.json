@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/layouts/404.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1727314706921,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1727314706921,
+            "name": "Commit-0",
+            "content": "@include('includes.styles')\n<div class=\"container min-vh-100 d-flex justify-content-center align-items-center\">\n    <!-- row -->\n    <div class=\"row\">\n        <!-- col -->\n        <div class=\"col-12\">\n            <!-- content -->\n            <div class=\"text-center\">\n                <div class=\"mb-3\">\n                    <!-- img -->\n                    <img src=\"../assets/images/error/404-error-img.png\" alt=\"\" class=\"img-fluid\">\n                </div>\n                <!-- text -->\n                <h1 class=\"display-4 fw-bold\">Oops! the page not found.</h1>\n                <p class=\"mb-4\">Or simply leverage the expertise of our consultation\n                    team.</p>\n                <!-- button -->\n                <a href=\"javascript:history.back()\" class=\"btn btn-primary\">Go Back</a>\n            </div>\n        </div>\n    </div>\n</div>\n"
+        }
+    ]
+}

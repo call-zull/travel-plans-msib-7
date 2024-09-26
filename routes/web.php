@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TravelPlanController;
 use App\Http\Controllers\BudgetPlanController;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // jk tidak di temukan / error hendling
 Route::fallback(function () {
@@ -12,21 +13,14 @@ Route::fallback(function () {
 });
 Auth::routes();
 Route::get('/', function () {
-    return redirect('/travel-plans');
+    return redirect('/dashboard');
 });
+
+Route::middleware('auth')->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('travel-plans', TravelPlanController::class);
 Route::resource('travel-plans.budget-plans', BudgetPlanController::class);
 
 Route::get('/log-viewer', function () {
-    return redirect('/log-viewer'); // Ini mengarahkan ke package log-viewer jika sudah di-install
+    return redirect('/log-viewer');
 })->name('log-viewer');
-
-
-Route::get('dashboard', function () {
-    return view('dashboard.dashboard');
-});
-
-Route::get('dashboard/login', function () {
-    return view('dashboard.register');
-});

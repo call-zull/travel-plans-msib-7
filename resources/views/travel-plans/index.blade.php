@@ -28,73 +28,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-6 col-md-12 col-12 mt-6">
-                <!-- card -->
-                <div class="card rounded-3">
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- heading -->
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <h4 class="mb-0">Plan</h4>
-                            </div>
-                            <div class="icon-shape icon-md bg-light-primary text-primary rounded-1">
-                                <i class="bi bi-briefcase fs-4"></i>
-                            </div>
-                        </div>
-                        <!-- project number -->
-                        <div>
-                            <h1 class="fw-bold">18</h1>
-                            <p class="mb-0"><span class="text-dark me-2">2</span>Completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-12 col-12 mt-6">
-                <!-- card -->
-                <div class="card rounded-3">
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- heading -->
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <h4 class="mb-0">Budget</h4>
-                            </div>
-                            <div class="icon-shape icon-md bg-light-primary text-primary rounded-1">
-                                <i class="bi bi-list-task fs-4"></i>
-                            </div>
-                        </div>
-                        <!-- project number -->
-                        <div>
-                            <h1 class="fw-bold">132</h1>
-                            <p class="mb-0"><span class="text-dark me-2">28</span>Completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-12 col-12 mt-6">
-                <!-- card -->
-                <div class="card rounded-3">
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- heading -->
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <h4 class="mb-0">Item</h4>
-                            </div>
-                            <div class="icon-shape icon-md bg-light-primary text-primary rounded-1">
-                                <i class="bi bi-people fs-4"></i>
-                            </div>
-                        </div>
-                        <!-- project number -->
-                        <div>
-                            <h1 class="fw-bold">12</h1>
-                            <p class="mb-0"><span class="text-dark me-2">1</span>Completed</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
         <!-- row  -->
         <div class="row mt-6">
@@ -113,7 +46,7 @@
                                         placeholder="Search for travel plans">
                                 </div>
 
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <select class="form-control" id="category" name="category">
                                         <option value="">-Select Category-</option>
                                         @foreach (\App\Enums\TravelCategoryEnum::asSelectArray() as $key => $item)
