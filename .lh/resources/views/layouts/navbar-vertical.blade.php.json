@@ -1,0 +1,30 @@
+{
+    "sourceFile": "resources/views/layouts/navbar-vertical.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1727312753806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727312759222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,4 +42,5 @@\n              </li>\n          </ul>\n      </div>\n  </nav>\n+@endauth\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727312835114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,5 +42,4 @@\n              </li>\n          </ul>\n      </div>\n  </nav>\n-@endauth\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727312864320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,44 @@\n+ <!-- Sidebar -->\n+ <nav class=\"navbar-vertical navbar\">\n+     <div class=\"nav-scroller\">\n+         <!-- Brand logo -->\n+         <a class=\"navbar-brand\" href=\"/\">\n+             <img src=\"{{ asset('assets') }}/images/brand/logo/logo.svg\" alt=\"\" />\n+         </a>\n+         <!-- Navbar nav -->\n+         <ul class=\"navbar-nav flex-column\" id=\"sideNavbar\">\n+             <li class=\"nav-item\">\n+                 <a class=\"nav-link has-arrow\" href=\"/\">\n+                     <i data-feather=\"home\" class=\"nav-icon icon-xs me-2\"></i> Dashboard\n+                 </a>\n+\n+             </li>\n+\n+             <!-- Nav item -->\n+             <li class=\"nav-item\">\n+                 <div class=\"navbar-heading\">Layouts & Pages</div>\n+             </li>\n+\n+             <!-- Nav item -->\n+             <li class=\"nav-item\">\n+                 <a class=\"nav-link has-arrow\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navPages\"\n+                     aria-expanded=\"false\" aria-controls=\"navPages\">\n+                     <i data-feather=\"layers\" class=\"nav-icon icon-xs me-2\">\n+                     </i> Pages\n+                 </a>\n+\n+                 <div id=\"navPages\" class=\"collapse\" data-bs-parent=\"#sideNavbar\">\n+                     <ul class=\"nav flex-column\">\n+                         <li class=\"nav-item\">\n+                             <a class=\"nav-link has-arrow\" href=\"\">\n+                                 Settings\n+                             </a>\n+\n+                         </li>\n+                     </ul>\n+                 </div>\n+\n+             </li>\n+         </ul>\n+     </div>\n+ </nav>\n"
+                }
+            ],
+            "date": 1727312753806,
+            "name": "Commit-0",
+            "content": " <!-- Sidebar -->\n @auth\n <nav class=\"navbar-vertical navbar\">\n     <div class=\"nav-scroller\">\n         <!-- Brand logo -->\n         <a class=\"navbar-brand\" href=\"/\">\n             <img src=\"{{ asset('assets') }}/images/brand/logo/logo.svg\" alt=\"\" />\n         </a>\n         <!-- Navbar nav -->\n         <ul class=\"navbar-nav flex-column\" id=\"sideNavbar\">\n             <li class=\"nav-item\">\n                 <a class=\"nav-link has-arrow\" href=\"/\">\n                     <i data-feather=\"home\" class=\"nav-icon icon-xs me-2\"></i> Dashboard\n                 </a>\n\n             </li>\n\n             <!-- Nav item -->\n             <li class=\"nav-item\">\n                 <div class=\"navbar-heading\">Layouts & Pages</div>\n             </li>\n\n             <!-- Nav item -->\n             <li class=\"nav-item\">\n                 <a class=\"nav-link has-arrow\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navPages\"\n                     aria-expanded=\"false\" aria-controls=\"navPages\">\n                     <i data-feather=\"layers\" class=\"nav-icon icon-xs me-2\">\n                     </i> Pages\n                 </a>\n\n                 <div id=\"navPages\" class=\"collapse\" data-bs-parent=\"#sideNavbar\">\n                     <ul class=\"nav flex-column\">\n                         <li class=\"nav-item\">\n                             <a class=\"nav-link has-arrow\" href=\"\">\n                                 Settings\n                             </a>\n\n                         </li>\n                     </ul>\n                 </div>\n\n             </li>\n         </ul>\n     </div>\n </nav>\n"
+        }
+    ]
+}

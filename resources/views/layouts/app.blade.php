@@ -18,7 +18,7 @@
             <div id="page-content">
 
                 @include('layouts.header')
-            @endauth
+        @endauth
 
             {{ $slot }}
 

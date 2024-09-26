@@ -1,0 +1,26 @@
+{
+    "sourceFile": "resources/views/layouts/scripts.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1727312382254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727312401946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n <script src=\"{{ asset('assets') }}/js/feather.js\"></script>\n <script src=\"{{ asset('assets') }}/js/main.js\"></script>\n <script src=\"{{ asset('assets') }}/js/sidebarMenu.js\"></script>\n-<script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script>\n+{{-- <script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script> --}}\n <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>\n <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\n     integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\">\n </script>\n"
+                },
+                {
+                    "date": 1727312407220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n <script src=\"{{ asset('assets') }}/js/feather.js\"></script>\n <script src=\"{{ asset('assets') }}/js/main.js\"></script>\n <script src=\"{{ asset('assets') }}/js/sidebarMenu.js\"></script>\n-{{-- <script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script> --}}\n+<script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script>\n <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>\n <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\n     integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\">\n </script>\n"
+                }
+            ],
+            "date": 1727312382254,
+            "name": "Commit-0",
+            "content": "<link rel=\"stylesheet\" href=\"{{ asset('assets') }}\">\n\n<script src=\"{{ asset('assets') }}/js/feather.js\"></script>\n<script src=\"{{ asset('assets') }}/js/main.js\"></script>\n<script src=\"{{ asset('assets') }}/js/sidebarMenu.js\"></script>\n<script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script>\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\n    integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\">\n</script>\n\n"
+        }
+    ]
+}
