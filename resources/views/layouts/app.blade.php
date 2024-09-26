@@ -13,20 +13,20 @@
     <div id="db-wrapper">
         <!-- navbar vertical -->
         @auth
-            @include('layouts.navbar-vertical')
+            @include('includes.navbar-vertical')
 
             <div id="page-content">
 
                 @include('layouts.header')
-        @endauth
+            @endauth
 
             {{ $slot }}
 
-            @include('layouts.footer')
+            @include('includes.footer')
         </div>
     </div>
     <!-- Scripts -->
-    @include('layouts.scripts')
+    @include('includes.scripts')
     @stack('scripts')
 </body>
 
