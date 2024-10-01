@@ -62,7 +62,9 @@ class TravelPlanController extends Controller
      */
     public function edit(TravelPlan $travelPlan)
     {
-        return view('travel-plans.edit', compact('travelPlan'));
+        $item = $travelPlan;
+
+        return view('travel-plans.edit', compact('item'));
     }
 
     /**
