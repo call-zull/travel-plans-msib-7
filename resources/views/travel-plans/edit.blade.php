@@ -1,4 +1,4 @@
-<form action="{{ route('travel-plans.update', $travelPlan->id) }}" method="POST">
+<form action="{{ route('travel-plans.update', $item->id) }}" method="POST">
     @csrf
     @method('PUT')
 

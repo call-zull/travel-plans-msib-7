@@ -18,9 +18,7 @@
                             <h3 class="mb-0 fw-bold text-white">Travel Plan</h3>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-white" data-url="{{ route('travel-plans.create') }}"
-                                data-title="Create Budget Plan" data-bs-toggle="modal"
-                                data-bs-target=".create-plan-modal">
+                            <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#add">
                                 Create New Plan
                             </button>
                             {{-- <a href="{{ route('travel-plans.create') }}" class="btn btn-white">Create New Plan</a> --}}
@@ -29,16 +27,19 @@
                 </div>
             </div>
         </div>
+
         <!-- row  -->
         <div class="row mt-6">
             <div class="col-md-12 col-12">
                 <!-- card  -->
-                <div class="card">
+                <x-card>
                     <!-- card header  -->
-                    <div class="card-header bg-white border-bottom-0 py-4">
+                    <div class="card-header bg-white border-bottom-0">
                         <h4 class="mb-0"> {{ Auth::user()->name }} your Travel Plans</h4>
                     </div>
                     <div class="card-body">
+                        {{-- Error Alert --}}
+                        <x-alert.error-validation />
                         <form action="{{ route('travel-plans.index') }}" method="get" class="mb-3">
                             <div class="row">
                                 <div class="col-lg-4">
@@ -78,38 +79,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($travelPlans as $plan)
+                                    @forelse ($travelPlans as $travelPlan)
                                         <tr>
                                             <td class="align-middle border-bottom-0">{{ $loop->iteration }}</td>
-                                            <td class="align-middle border-bottom-0">{{ $plan->plan }}</td>
-                                            <td class="align-middle border-bottom-0">{{ $plan->categoryDescription }}
-                                            </td>
-                                            <td class="align-middle border-bottom-0">{{ $plan->day }}</td>
-                                            <td class="align-middle border-bottom-0">{{ $plan->formatted_date }}</td>
+                                            <td class="align-middle border-bottom-0">{{ $travelPlan->plan }}</td>
                                             <td class="align-middle border-bottom-0">
-                                                {{ formatMataUang($plan->budget_plans_sum_total) }}</td>
+                                                {{ $travelPlan->categoryDescription }}
+                                            </td>
+                                            <td class="align-middle border-bottom-0">{{ $travelPlan->day }}</td>
+                                            <td class="align-middle border-bottom-0">{{ $travelPlan->formatted_date }}
+                                            </td>
+                                            <td class="align-middle border-bottom-0">
+                                                {{ formatMataUang($travelPlan->budget_plans_sum_total) }}</td>
                                             <td class="align-middle border-bottom-0">
                                                 <button type="button" class="btn btn-success btn-sm"
-                                                    data-url="{{ route('travel-plans.edit', $plan->id) }}"
-                                                    data-title="Edit Budget Plan {{ $plan->plan }}"
+                                                    data-url="{{ route('travel-plans.edit', $travelPlan->id) }}"
+                                                    data-title="Edit Budget Plan {{ $travelPlan->plan }}"
                                                     data-bs-toggle="modal" data-bs-target=".edit-plan-modal">
                                                     Edit
                                                 </button>
 
-                                                <a href="{{ route('travel-plans.destroy', $plan->id) }}"
+                                                <a href="{{ route('travel-plans.destroy', $travelPlan->id) }}"
                                                     class="btn btn-sm btn-danger" data-sweetalert-delete
                                                     data-title="Delete!"
-                                                    data-text="Are you sure you want to delete {{ $plan->plan }}?">Hapus</a>
+                                                    data-text="Are you sure you want to delete {{ $travelPlan->plan }}?">Hapus</a>
 
                                                 <!-- Button to trigger modal -->
                                                 <button type="button" class="btn btn-primary btn-sm"
-                                                    data-url="{{ route('travel-plans.show', $plan->id) }}"
-                                                    data-title="Budget Plan {{ $plan->plan }}" data-bs-toggle="modal"
-                                                    data-bs-target=".show-plan-modal">
+                                                    data-url="{{ route('travel-plans.show', $travelPlan->id) }}"
+                                                    data-title="Budget Plan {{ $travelPlan->plan }}"
+                                                    data-bs-toggle="modal" data-bs-target=".show-plan-modal">
                                                     Details
                                                 </button>
 
-                                                <a href="{{ route('travel-plans.budget-plans.index', $plan->id) }}"
+                                                <a href="{{ route('travel-plans.budget-plans.index', $travelPlan->id) }}"
                                                     class="btn btn-sm btn-warning">Budget Plan</a>
                                             </td>
                                         </tr>
@@ -125,12 +128,21 @@
                         </div>
                         <x-pagination :data="$travelPlans" />
                     </div>
-                </div>
+                </x-card>
             </div>
         </div>
     </div>
 
+    <x-modal.open title="Create Plan" id="add">
+        <x-form :action="route('travel-plans.store')">
+
+            @include('travel-plans._form')
+
+            <x-button.submit>Save Plan</x-button.submit>
+            <a href="{{ route('travel-plans.index') }}" class="btn btn-secondary">Cancel</a>
+        </x-form>
+    </x-modal.open>
+
     <x-modal.show class="edit-plan-modal" />
-    <x-modal.show class="create-plan-modal" />
     <x-modal.show class="show-plan-modal" size="modal-lg" />
 </x-app-layout>
